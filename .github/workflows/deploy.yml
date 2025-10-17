@@ -28,7 +28,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './we.should.hangout.demo'
+          path: '.'
 
   deploy:
     environment:
