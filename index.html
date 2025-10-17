@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>We Should Hangout</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <h1>We Should Hangout</h1>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Hangout Hub -->
+            <section class="hangout-hub" id="hangoutHub">
+                <div class="hangout-hub-header">
+                    <h2>Hangout Hub</h2>
+                    <button class="search-icon-btn" id="searchIconBtn">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+                <div class="search-container" id="searchContainer" style="display: none;">
+                    <input type="text" id="searchEvents" placeholder="🔍 Search events..." class="search-input">
+                </div>
+                <div class="events-list" id="eventsList">
+                    <!-- Events will be populated by JavaScript -->
+                </div>
+            </section>
+
+            <!-- My Events Section -->
+            <section class="my-events" id="myEvents" style="display: none;">
+                <h2>My Events</h2>
+                
+                <!-- Attending Events -->
+                <div class="events-section">
+                    <h3 class="section-header">Attending Events</h3>
+                    <div class="events-list" id="attendingEventsList">
+                        <!-- Attending events will be populated by JavaScript -->
+                    </div>
+                </div>
+                
+                <!-- Hosted Events -->
+                <div class="events-section">
+                    <h3 class="section-header">Hosted Events</h3>
+                    <div class="events-list" id="hostedEventsList">
+                        <!-- Hosted events will be populated by JavaScript -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Profile Section -->
+            <section class="profile" id="profile" style="display: none;">
+                <h2>Profile</h2>
+                <div class="profile-content">
+                    <div class="profile-header">
+                        <div class="profile-avatar">Y</div>
+                        <h3>You</h3>
+                        <div class="profile-stats">
+                            <div class="stat-item">
+                                <span class="stat-number" id="eventsCreated">5</span>
+                                <span class="stat-label">Created</span>
+                                <div class="stat-sub-item">
+                                    <span class="stat-number" id="totalAttendees">28</span>
+                                    <span class="stat-label">Total Attendees</span>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number" id="eventsJoined">12</span>
+                                <span class="stat-label">Joined</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number" id="peopleMet">67</span>
+                                <span class="stat-label">People Met</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="badges-section">
+                        <h4>Badges</h4>
+                        <div class="badges-grid" id="badgesGrid">
+                            <!-- Badges will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Bottom Navigation -->
+        <nav class="bottom-nav">
+            <button class="nav-btn active" data-section="hangout-hub">
+                <i class="fas fa-home"></i>
+                <span>Hub</span>
+            </button>
+            <button class="nav-btn" data-section="my-events">
+                <i class="fas fa-calendar-check"></i>
+                <span>My Events</span>
+            </button>
+            <button class="nav-btn add-event-btn" id="addEventBtn">
+                <i class="fas fa-plus"></i>
+                <span>Add</span>
+            </button>
+            <button class="nav-btn" data-section="profile">
+                <i class="fas fa-user"></i>
+                <span>Profile</span>
+            </button>
+        </nav>
+
+        <!-- Event Detail Modal -->
+        <div class="modal" id="eventModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="modalEventTitle"></h3>
+                    <button class="close-btn" id="closeModal">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="event-details">
+                        <p><i class="fas fa-calendar"></i> <span id="modalEventDate"></span></p>
+                        <p><i class="fas fa-clock"></i> <span id="modalEventTime"></span></p>
+                        <p><i class="fas fa-map-marker-alt"></i> <span id="modalEventLocation"></span></p>
+                        <p><i class="fas fa-users"></i> <span id="modalEventLimit"></span></p>
+                    </div>
+                    <div class="attendees-section">
+                        <h4>Who's Going</h4>
+                        <div class="attendees-list" id="attendeesList">
+                            <!-- Attendees will be populated by JavaScript -->
+                        </div>
+                    </div>
+                    <div class="modal-actions">
+                        <button class="join-btn" id="joinEventBtn">Join Event</button>
+                        <div class="joined-actions" id="joinedActions" style="display: none;">
+                            <button class="action-btn leave-btn" id="leaveEventBtn">
+                                <i class="fas fa-user-minus"></i>
+                                Leave Event
+                            </button>
+                            <button class="action-btn my-events-btn" id="goToMyEventsBtn">
+                                <i class="fas fa-calendar-check"></i>
+                                My Events
+                            </button>
+                            <button class="action-btn hub-btn" id="goToHubBtn">
+                                <i class="fas fa-home"></i>
+                                Event Hub
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Add Event Modal -->
+        <div class="modal" id="addEventModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Add New Event</h3>
+                    <button class="close-btn" id="closeAddModal">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="addEventForm">
+                        <!-- Category Selection Step -->
+                        <div class="category-selection" id="categorySelection">
+                            <h4>Choose Event Category</h4>
+                            <div class="category-grid">
+                                <div class="category-option" data-category="movie" data-icon="🎬">
+                                    <div class="category-icon">🎬</div>
+                                    <span>Movie</span>
+                                </div>
+                                <div class="category-option" data-category="boardgame" data-icon="🎲">
+                                    <div class="category-icon">🎲</div>
+                                    <span>Board Game</span>
+                                </div>
+                                <div class="category-option" data-category="hike" data-icon="🥾">
+                                    <div class="category-icon">🥾</div>
+                                    <span>Hike</span>
+                                </div>
+                                <div class="category-option" data-category="basketball" data-icon="🏀">
+                                    <div class="category-icon">🏀</div>
+                                    <span>Basketball</span>
+                                </div>
+                                <div class="category-option" data-category="soccer" data-icon="⚽">
+                                    <div class="category-icon">⚽</div>
+                                    <span>Soccer</span>
+                                </div>
+                                <div class="category-option" data-category="tennis" data-icon="🎾">
+                                    <div class="category-icon">🎾</div>
+                                    <span>Tennis</span>
+                                </div>
+                                <div class="category-option" data-category="pickleball" data-icon="🏓">
+                                    <div class="category-icon">🏓</div>
+                                    <span>Pickleball</span>
+                                </div>
+                                <div class="category-option" data-category="ultimate" data-icon="🥏">
+                                    <div class="category-icon">🥏</div>
+                                    <span>Ultimate Frisbee</span>
+                                </div>
+                                <div class="category-option" data-category="volleyball" data-icon="🏐">
+                                    <div class="category-icon">🏐</div>
+                                    <span>Volleyball</span>
+                                </div>
+                                <div class="category-option" data-category="golf" data-icon="⛳">
+                                    <div class="category-icon">⛳</div>
+                                    <span>Golf</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Event Details Form (Hidden Initially) -->
+                        <div class="event-details-form" id="eventDetailsForm" style="display: none;">
+                            <div class="selected-category" id="selectedCategory">
+                                <span class="category-icon" id="selectedIcon"></span>
+                                <span id="selectedCategoryName"></span>
+                            </div>
+                            <div class="form-group" id="titleGroup" style="display: none;">
+                                <label for="eventTitle">Movie Title</label>
+                                <input type="text" id="eventTitle" name="title" placeholder="Enter movie name">
+                            </div>
+                        <div class="form-group">
+                            <label for="eventDate">Date</label>
+                            <input type="date" id="eventDate" name="date" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="eventTime">Time</label>
+                            <input type="time" id="eventTime" name="time" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="eventLocation">Location</label>
+                            <input type="text" id="eventLocation" name="location" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="eventLimit">People Limit</label>
+                            <div class="number-input-container">
+                                <button type="button" class="number-btn" id="decreaseLimit">-</button>
+                                <input type="number" id="eventLimit" name="limit" min="3" value="3" required readonly>
+                                <button type="button" class="number-btn" id="increaseLimit">+</button>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="eventDescription">Description</label>
+                            <textarea id="eventDescription" name="description" rows="3"></textarea>
+                        </div>
+                            <div class="form-actions">
+                                <button type="button" class="back-btn" id="backToCategory">Back</button>
+                                <button type="button" class="cancel-btn" id="cancelAddEvent">Cancel</button>
+                                <button type="submit" class="create-btn">Create Event</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <!-- Toast Notification -->
+        <div class="toast" id="toast">
+            <div class="toast-content">
+                <i class="toast-icon"></i>
+                <span class="toast-message"></span>
+            </div>
+        </div>
+
+        <!-- Badge Detail Modal -->
+        <div class="modal" id="badgeModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="badgeModalTitle"></h3>
+                    <button class="close-btn" id="closeBadgeModal">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="badge-detail">
+                        <div class="badge-icon-large" id="badgeIconLarge"></div>
+                        <div class="badge-description" id="badgeDescription"></div>
+                        <div class="badge-progress" id="badgeProgress"></div>
+                        <div class="badge-tips" id="badgeTips"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    <script src="script.js"></script>
+</body>
+</html>
