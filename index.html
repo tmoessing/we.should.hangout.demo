@@ -20,36 +20,89 @@
             <section class="hangout-hub" id="hangoutHub">
                 <div class="hangout-hub-header">
                     <h2>Hangout Hub</h2>
-                    <button class="search-icon-btn" id="searchIconBtn">
-                        <i class="fas fa-search"></i>
-                    </button>
+                    <div class="header-controls">
+                        <button class="filter-btn" id="filterBtn">
+                            <i class="fas fa-filter"></i>
+                        </button>
+                        <button class="search-icon-btn" id="searchIconBtn">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
                 </div>
                 <div class="search-container" id="searchContainer" style="display: none;">
                     <input type="text" id="searchEvents" placeholder="🔍 Search events..." class="search-input">
                 </div>
+                <div class="filter-container" id="filterContainer" style="display: none;">
+                    <div class="filter-dropdown">
+                        <div class="filter-option" data-category="all">
+                            <span class="filter-icon">🎯</span>
+                            <span>All Categories</span>
+                        </div>
+                        <div class="filter-option" data-category="sports">
+                            <span class="filter-icon">⚽</span>
+                            <span>Sports</span>
+                        </div>
+                        <div class="filter-option" data-category="entertainment">
+                            <span class="filter-icon">🎬</span>
+                            <span>Entertainment</span>
+                        </div>
+                        <div class="filter-option" data-category="food">
+                            <span class="filter-icon">🍽️</span>
+                            <span>Food & Dining</span>
+                        </div>
+                        <div class="filter-option" data-category="social">
+                            <span class="filter-icon">🎉</span>
+                            <span>Social</span>
+                        </div>
+                        <div class="filter-option" data-category="fitness">
+                            <span class="filter-icon">💪</span>
+                            <span>Fitness</span>
+                        </div>
+                        <div class="filter-option" data-category="arts">
+                            <span class="filter-icon">🎨</span>
+                            <span>Arts & Culture</span>
+                        </div>
+                        <div class="filter-option" data-category="education">
+                            <span class="filter-icon">📚</span>
+                            <span>Education</span>
+                        </div>
+                        <div class="filter-option" data-category="outdoor">
+                            <span class="filter-icon">🥾</span>
+                            <span>Outdoor</span>
+                        </div>
+                    </div>
+                </div>
                 <div class="events-list" id="eventsList">
-                    <!-- Events will be populated by JavaScript -->
+                    <!-- Hangouts will be populated by JavaScript -->
                 </div>
             </section>
 
-            <!-- My Events Section -->
+            <!-- My Hangouts Section -->
             <section class="my-events" id="myEvents" style="display: none;">
-                <h2>My Events</h2>
+                <h2>My Hangouts</h2>
                 
-                <!-- Attending Events -->
+                <!-- Attending Hangouts -->
                 <div class="events-section">
-                    <h3 class="section-header">Attending Events</h3>
+                    <h3 class="section-header">Attending Hangouts</h3>
                     <div class="events-list" id="attendingEventsList">
-                        <!-- Attending events will be populated by JavaScript -->
+                        <!-- Attending hangouts will be populated by JavaScript -->
                     </div>
                 </div>
                 
-                <!-- Hosted Events -->
+                <!-- Hosted Hangouts -->
                 <div class="events-section">
-                    <h3 class="section-header">Hosted Events</h3>
+                    <h3 class="section-header">Hosted Hangouts</h3>
                     <div class="events-list" id="hostedEventsList">
-                        <!-- Hosted events will be populated by JavaScript -->
+                        <!-- Hosted hangouts will be populated by JavaScript -->
                     </div>
+                </div>
+            </section>
+
+            <!-- Messages Section -->
+            <section class="messages" id="messages" style="display: none;">
+                <h2>Messages</h2>
+                <div class="messages-list" id="messagesList">
+                    <!-- Messages will be populated by JavaScript -->
                 </div>
             </section>
 
@@ -97,11 +150,16 @@
             </button>
             <button class="nav-btn" data-section="my-events">
                 <i class="fas fa-calendar-check"></i>
-                <span>My Events</span>
+                <span>My Hangouts</span>
             </button>
             <button class="nav-btn add-event-btn" id="addEventBtn">
                 <i class="fas fa-plus"></i>
                 <span>Add</span>
+            </button>
+            <button class="nav-btn" data-section="messages">
+                <i class="fas fa-comments"></i>
+                <span>Messages</span>
+                <div class="unread-badge" id="messagesBadge" style="display: none;">0</div>
             </button>
             <button class="nav-btn" data-section="profile">
                 <i class="fas fa-user"></i>
@@ -138,6 +196,10 @@
                                 <i class="fas fa-user-minus"></i>
                                 Leave Event
                             </button>
+                            <button class="action-btn message-btn" id="messageEventBtn">
+                                <i class="fas fa-comments"></i>
+                                Messages
+                            </button>
                             <button class="action-btn my-events-btn" id="goToMyEventsBtn">
                                 <i class="fas fa-calendar-check"></i>
                                 My Events
@@ -156,7 +218,7 @@
         <div class="modal" id="addEventModal">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3>Add New Event</h3>
+                    <h3>Add New Hangout</h3>
                     <button class="close-btn" id="closeAddModal">
                         <i class="fas fa-times"></i>
                     </button>
@@ -165,47 +227,457 @@
                     <form id="addEventForm">
                         <!-- Category Selection Step -->
                         <div class="category-selection" id="categorySelection">
-                            <h4>Choose Event Category</h4>
-                            <div class="category-grid">
-                                <div class="category-option" data-category="movie" data-icon="🎬">
+                            <h4>Choose Hangout Category</h4>
+                            <div class="category-search-container">
+                                <input type="text" id="categorySearch" placeholder="🔍 Search categories..." class="category-search-input">
+                            </div>
+                            <div class="category-container">
+                                <!-- Sports Category -->
+                                <div class="category-group" data-category="sports">
+                                    <div class="category-header" onclick="toggleCategoryDropdown('sports')">
+                                        <div class="category-icon">⚽</div>
+                                        <span>Sports</span>
+                                        <i class="fas fa-chevron-down dropdown-arrow"></i>
+                                    </div>
+                                    <div class="category-dropdown" id="sports-dropdown">
+                                        <div class="subcategory-grid">
+                                            <div class="subcategory-option" data-category="basketball" data-icon="🏀">
+                                                <div class="category-icon">🏀</div>
+                                                <span>Basketball</span>
+                                            </div>
+                                            <div class="subcategory-option" data-category="pickleball" data-icon="🏓">
+                                                <div class="category-icon">🏓</div>
+                                                <span>Pickleball</span>
+                                            </div>
+                                            <div class="subcategory-option" data-category="wiffleball" data-icon="🥎">
+                                                <div class="category-icon">🥎</div>
+                                                <span>Wiffleball</span>
+                                            </div>
+                                            <div class="subcategory-option" data-category="spikeball" data-icon="🏐">
+                                                <div class="category-icon">🏐</div>
+                                                <span>Spikeball</span>
+                                            </div>
+                                            <div class="subcategory-option" data-category="volleyball" data-icon="🏐">
+                                                <div class="category-icon">🏐</div>
+                                                <span>Volleyball</span>
+                                            </div>
+                                            <div class="subcategory-option" data-category="soccer" data-icon="⚽">
+                                                <div class="category-icon">⚽</div>
+                                                <span>Soccer</span>
+                                            </div>
+                                            <div class="subcategory-option" data-category="tennis" data-icon="🎾">
+                                                <div class="category-icon">🎾</div>
+                                                <span>Tennis</span>
+                                            </div>
+                                            <div class="subcategory-option" data-category="golf" data-icon="⛳">
+                                                <div class="category-icon">⛳</div>
+                                                <span>Golf</span>
+                                            </div>
+                                            <div class="subcategory-option" data-category="ultimate" data-icon="🥏">
+                                                <div class="category-icon">🥏</div>
+                                                <span>Ultimate Frisbee</span>
+                                            </div>
+                                            <div class="subcategory-option" data-category="badminton" data-icon="🏸">
+                                                <div class="category-icon">🏸</div>
+                                                <span>Badminton</span>
+                                            </div>
+                                            <div class="subcategory-option" data-category="table-tennis" data-icon="🏓">
+                                                <div class="category-icon">🏓</div>
+                                                <span>Table Tennis</span>
+                                            </div>
+                                            <div class="subcategory-option" data-category="softball" data-icon="🥎">
+                                                <div class="category-icon">🥎</div>
+                                                <span>Softball</span>
+                                            </div>
+                                            <div class="subcategory-option" data-category="flag-football" data-icon="🏈">
+                                                <div class="category-icon">🏈</div>
+                                                <span>Flag Football</span>
+                                            </div>
+                                            <div class="subcategory-option" data-category="kickball" data-icon="⚽">
+                                                <div class="category-icon">⚽</div>
+                                                <span>Kickball</span>
+                                            </div>
+                                            <div class="subcategory-option" data-category="dodgeball" data-icon="🏐">
+                                                <div class="category-icon">🏐</div>
+                                                <span>Dodgeball</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Entertainment Category -->
+                                <div class="category-group" data-category="entertainment">
+                                    <div class="category-header" onclick="toggleCategoryDropdown('entertainment')">
+                                        <div class="category-icon">🎬</div>
+                                        <span>Entertainment</span>
+                                        <i class="fas fa-chevron-down dropdown-arrow"></i>
+                                    </div>
+                                    <div class="category-dropdown" id="entertainment-dropdown">
+                                        <div class="subcategory-grid">
+                                            <div class="subcategory-option" data-category="movie" data-icon="🎬">
                                     <div class="category-icon">🎬</div>
                                     <span>Movie</span>
                                 </div>
-                                <div class="category-option" data-category="boardgame" data-icon="🎲">
+                                            <div class="subcategory-option" data-category="boardgame" data-icon="🎲">
                                     <div class="category-icon">🎲</div>
                                     <span>Board Game</span>
                                 </div>
-                                <div class="category-option" data-category="hike" data-icon="🥾">
-                                    <div class="category-icon">🥾</div>
-                                    <span>Hike</span>
+                                            <div class="subcategory-option" data-category="video-games" data-icon="🎮">
+                                                <div class="category-icon">🎮</div>
+                                                <span>Video Games</span>
+                                            </div>
+                                            <div class="subcategory-option" data-category="karaoke" data-icon="🎤">
+                                                <div class="category-icon">🎤</div>
+                                                <span>Karaoke</span>
+                                            </div>
+                                            <div class="subcategory-option" data-category="trivia" data-icon="🧠">
+                                                <div class="category-icon">🧠</div>
+                                                <span>Trivia Night</span>
+                                            </div>
+                                            <div class="subcategory-option" data-category="escape-room" data-icon="🔍">
+                                                <div class="category-icon">🔍</div>
+                                                <span>Escape Room</span>
+                                            </div>
+                                            <div class="subcategory-option" data-category="arcade" data-icon="🕹️">
+                                                <div class="category-icon">🕹️</div>
+                                                <span>Arcade</span>
+                                            </div>
+                                            <div class="subcategory-option" data-category="comedy-show" data-icon="😂">
+                                                <div class="category-icon">😂</div>
+                                                <span>Comedy Show</span>
+                                            </div>
+                                            <div class="subcategory-option" data-category="dance" data-icon="💃">
+                                                <div class="category-icon">💃</div>
+                                                <span>Dance</span>
+                                            </div>
+                                            <div class="subcategory-option" data-category="magic-show" data-icon="🎩">
+                                                <div class="category-icon">🎩</div>
+                                                <span>Magic Show</span>
+                                            </div>
+                                            <div class="subcategory-option" data-category="stand-up" data-icon="🎭">
+                                                <div class="category-icon">🎭</div>
+                                                <span>Stand-up</span>
+                                            </div>
+                                            <div class="subcategory-option" data-category="improv" data-icon="🎪">
+                                                <div class="category-icon">🎪</div>
+                                                <span>Improv</span>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="category-option" data-category="basketball" data-icon="🏀">
-                                    <div class="category-icon">🏀</div>
-                                    <span>Basketball</span>
+
+                                <!-- Food & Dining Category -->
+                                <div class="category-group" data-category="food">
+                                    <div class="category-header" onclick="toggleCategoryDropdown('food')">
+                                        <div class="category-icon">🍽️</div>
+                                        <span>Food & Dining</span>
+                                        <i class="fas fa-chevron-down dropdown-arrow"></i>
+                                    </div>
+                                    <div class="category-dropdown" id="food-dropdown">
+                                        <div class="subcategory-grid">
+                                            <div class="subcategory-option" data-category="restaurant" data-icon="🍽️">
+                                                <div class="category-icon">🍽️</div>
+                                                <span>Restaurant</span>
+                                            </div>
+                                            <div class="subcategory-option" data-category="cooking" data-icon="👨‍🍳">
+                                                <div class="category-icon">👨‍🍳</div>
+                                                <span>Cooking</span>
+                                            </div>
+                                            <div class="subcategory-option" data-category="coffee" data-icon="☕">
+                                                <div class="category-icon">☕</div>
+                                                <span>Coffee</span>
+                                            </div>
+                                            <div class="subcategory-option" data-category="bbq" data-icon="🍖">
+                                                <div class="category-icon">🍖</div>
+                                                <span>BBQ</span>
+                                            </div>
+                                            <div class="subcategory-option" data-category="potluck" data-icon="🥘">
+                                                <div class="category-icon">🥘</div>
+                                                <span>Potluck</span>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="category-option" data-category="soccer" data-icon="⚽">
-                                    <div class="category-icon">⚽</div>
-                                    <span>Soccer</span>
+
+                                <!-- Social Category -->
+                                <div class="category-group" data-category="social">
+                                    <div class="category-header" onclick="toggleCategoryDropdown('social')">
+                                        <div class="category-icon">🎉</div>
+                                        <span>Social</span>
+                                        <i class="fas fa-chevron-down dropdown-arrow"></i>
+                                    </div>
+                                    <div class="category-dropdown" id="social-dropdown">
+                                        <div class="subcategory-grid">
+                                            <div class="subcategory-option" data-category="party" data-icon="🎉">
+                                                <div class="category-icon">🎉</div>
+                                                <span>Party</span>
+                                            </div>
+                                            <div class="subcategory-option" data-category="meetup" data-icon="🤝">
+                                                <div class="category-icon">🤝</div>
+                                                <span>Meetup</span>
+                                            </div>
+                                            <div class="subcategory-option" data-category="networking" data-icon="💼">
+                                                <div class="category-icon">💼</div>
+                                                <span>Networking</span>
+                                            </div>
+                                            <div class="subcategory-option" data-category="game-night" data-icon="🎮">
+                                                <div class="category-icon">🎮</div>
+                                                <span>Game Night</span>
+                                            </div>
+                                            <div class="subcategory-option" data-category="speed-dating" data-icon="💕">
+                                                <div class="category-icon">💕</div>
+                                                <span>Speed Dating</span>
+                                            </div>
+                                            <div class="subcategory-option" data-category="mixer" data-icon="🍹">
+                                                <div class="category-icon">🍹</div>
+                                                <span>Mixer</span>
+                                            </div>
+                                            <div class="subcategory-option" data-category="happy-hour" data-icon="🍻">
+                                                <div class="category-icon">🍻</div>
+                                                <span>Happy Hour</span>
+                                            </div>
+                                            <div class="subcategory-option" data-category="college-football-watch-party" data-icon="🏈">
+                                                <div class="category-icon">🏈</div>
+                                                <span>College Football Watch Party</span>
+                                            </div>
+                                            <div class="subcategory-option" data-category="language-exchange" data-icon="🗣️">
+                                                <div class="category-icon">🗣️</div>
+                                                <span>Language Exchange</span>
+                                            </div>
+                                            <div class="subcategory-option" data-category="book-club" data-icon="📖">
+                                                <div class="category-icon">📖</div>
+                                                <span>Book Club</span>
+                                            </div>
+                                            <div class="subcategory-option" data-category="coffee-chat" data-icon="☕">
+                                                <div class="category-icon">☕</div>
+                                                <span>Coffee Chat</span>
+                                            </div>
+                                            <div class="subcategory-option" data-category="wine-tasting" data-icon="🍷">
+                                                <div class="category-icon">🍷</div>
+                                                <span>Wine Tasting</span>
+                                            </div>
+                                            <div class="subcategory-option" data-category="potluck" data-icon="🥘">
+                                                <div class="category-icon">🥘</div>
+                                                <span>Potluck</span>
+                                            </div>
+                                            <div class="subcategory-option" data-category="brunch" data-icon="🥞">
+                                                <div class="category-icon">🥞</div>
+                                                <span>Brunch</span>
+                                            </div>
+                                            <div class="subcategory-option" data-category="ice-breaker" data-icon="🧊">
+                                                <div class="category-icon">🧊</div>
+                                                <span>Ice Breaker</span>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="category-option" data-category="tennis" data-icon="🎾">
-                                    <div class="category-icon">🎾</div>
-                                    <span>Tennis</span>
+
+                                <!-- Fitness Category -->
+                                <div class="category-group" data-category="fitness">
+                                    <div class="category-header" onclick="toggleCategoryDropdown('fitness')">
+                                        <div class="category-icon">💪</div>
+                                        <span>Fitness</span>
+                                        <i class="fas fa-chevron-down dropdown-arrow"></i>
+                                    </div>
+                                    <div class="category-dropdown" id="fitness-dropdown">
+                                        <div class="subcategory-grid">
+                                            <div class="subcategory-option" data-category="gym" data-icon="🏋️">
+                                                <div class="category-icon">🏋️</div>
+                                                <span>Gym</span>
+                                            </div>
+                                            <div class="subcategory-option" data-category="yoga" data-icon="🧘">
+                                                <div class="category-icon">🧘</div>
+                                                <span>Yoga</span>
+                                            </div>
+                                            <div class="subcategory-option" data-category="running" data-icon="🏃">
+                                                <div class="category-icon">🏃</div>
+                                                <span>Running</span>
+                                            </div>
+                                            <div class="subcategory-option" data-category="cycling" data-icon="🚴">
+                                                <div class="category-icon">🚴</div>
+                                                <span>Cycling</span>
+                                            </div>
+                                            <div class="subcategory-option" data-category="swimming" data-icon="🏊">
+                                                <div class="category-icon">🏊</div>
+                                                <span>Swimming</span>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="category-option" data-category="pickleball" data-icon="🏓">
-                                    <div class="category-icon">🏓</div>
-                                    <span>Pickleball</span>
+
+                                <!-- Arts & Culture Category -->
+                                <div class="category-group" data-category="arts">
+                                    <div class="category-header" onclick="toggleCategoryDropdown('arts')">
+                                        <div class="category-icon">🎨</div>
+                                        <span>Arts & Culture</span>
+                                        <i class="fas fa-chevron-down dropdown-arrow"></i>
+                                    </div>
+                                    <div class="category-dropdown" id="arts-dropdown">
+                                        <div class="subcategory-grid">
+                                            <div class="subcategory-option" data-category="museum" data-icon="🏛️">
+                                                <div class="category-icon">🏛️</div>
+                                                <span>Museum</span>
+                                            </div>
+                                            <div class="subcategory-option" data-category="art-gallery" data-icon="🖼️">
+                                                <div class="category-icon">🖼️</div>
+                                                <span>Art Gallery</span>
+                                            </div>
+                                            <div class="subcategory-option" data-category="concert" data-icon="🎵">
+                                                <div class="category-icon">🎵</div>
+                                                <span>Concert</span>
+                                            </div>
+                                            <div class="subcategory-option" data-category="theater" data-icon="🎭">
+                                                <div class="category-icon">🎭</div>
+                                                <span>Theater</span>
+                                            </div>
+                                            <div class="subcategory-option" data-category="photography" data-icon="📸">
+                                                <div class="category-icon">📸</div>
+                                                <span>Photography</span>
+                                            </div>
+                                            <div class="subcategory-option" data-category="art-class" data-icon="🎨">
+                                                <div class="category-icon">🎨</div>
+                                                <span>Art Class</span>
+                                            </div>
+                                            <div class="subcategory-option" data-category="poetry-reading" data-icon="📖">
+                                                <div class="category-icon">📖</div>
+                                                <span>Poetry Reading</span>
+                                            </div>
+                                            <div class="subcategory-option" data-category="dance-class" data-icon="💃">
+                                                <div class="category-icon">💃</div>
+                                                <span>Dance Class</span>
+                                            </div>
+                                            <div class="subcategory-option" data-category="pottery" data-icon="🏺">
+                                                <div class="category-icon">🏺</div>
+                                                <span>Pottery</span>
+                                            </div>
+                                            <div class="subcategory-option" data-category="sculpture" data-icon="🗿">
+                                                <div class="category-icon">🗿</div>
+                                                <span>Sculpture</span>
+                                            </div>
+                                            <div class="subcategory-option" data-category="music-lesson" data-icon="🎼">
+                                                <div class="category-icon">🎼</div>
+                                                <span>Music Lesson</span>
+                                            </div>
+                                            <div class="subcategory-option" data-category="book-club" data-icon="📚">
+                                                <div class="category-icon">📚</div>
+                                                <span>Book Club</span>
+                                            </div>
+                                            <div class="subcategory-option" data-category="film-festival" data-icon="🎬">
+                                                <div class="category-icon">🎬</div>
+                                                <span>Film Festival</span>
+                                            </div>
+                                            <div class="subcategory-option" data-category="cultural-festival" data-icon="🎪">
+                                                <div class="category-icon">🎪</div>
+                                                <span>Cultural Festival</span>
+                                            </div>
+                                            <div class="subcategory-option" data-category="art-walk" data-icon="🚶">
+                                                <div class="category-icon">🚶</div>
+                                                <span>Art Walk</span>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="category-option" data-category="ultimate" data-icon="🥏">
-                                    <div class="category-icon">🥏</div>
-                                    <span>Ultimate Frisbee</span>
+
+                                <!-- Education Category -->
+                                <div class="category-group" data-category="education">
+                                    <div class="category-header" onclick="toggleCategoryDropdown('education')">
+                                        <div class="category-icon">📚</div>
+                                        <span>Education</span>
+                                        <i class="fas fa-chevron-down dropdown-arrow"></i>
+                                    </div>
+                                    <div class="category-dropdown" id="education-dropdown">
+                                        <div class="subcategory-grid">
+                                            <div class="subcategory-option" data-category="college-football-watch-party" data-icon="🏈">
+                                                <div class="category-icon">🏈</div>
+                                                <span>College Football Watch Party</span>
+                                            </div>
+                                            <div class="subcategory-option" data-category="workshop" data-icon="🔧">
+                                                <div class="category-icon">🔧</div>
+                                                <span>Workshop</span>
+                                            </div>
+                                            <div class="subcategory-option" data-category="lecture" data-icon="🎓">
+                                                <div class="category-icon">🎓</div>
+                                                <span>Lecture</span>
+                                            </div>
+                                            <div class="subcategory-option" data-category="language-exchange" data-icon="🗣️">
+                                                <div class="category-icon">🗣️</div>
+                                                <span>Language Exchange</span>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="category-option" data-category="volleyball" data-icon="🏐">
-                                    <div class="category-icon">🏐</div>
-                                    <span>Volleyball</span>
+
+                                <!-- Outdoor Category -->
+                                <div class="category-group" data-category="outdoor">
+                                    <div class="category-header" onclick="toggleCategoryDropdown('outdoor')">
+                                        <div class="category-icon">🥾</div>
+                                        <span>Outdoor</span>
+                                        <i class="fas fa-chevron-down dropdown-arrow"></i>
+                                    </div>
+                                    <div class="category-dropdown" id="outdoor-dropdown">
+                                        <div class="subcategory-grid">
+                                            <div class="subcategory-option" data-category="hike" data-icon="🥾">
+                                                <div class="category-icon">🥾</div>
+                                                <span>Hike</span>
+                                            </div>
+                                            <div class="subcategory-option" data-category="camping" data-icon="⛺">
+                                                <div class="category-icon">⛺</div>
+                                                <span>Camping</span>
+                                            </div>
+                                            <div class="subcategory-option" data-category="picnic" data-icon="🧺">
+                                                <div class="category-icon">🧺</div>
+                                                <span>Picnic</span>
+                                            </div>
+                                            <div class="subcategory-option" data-category="fishing" data-icon="🎣">
+                                                <div class="category-icon">🎣</div>
+                                                <span>Fishing</span>
+                                            </div>
+                                            <div class="subcategory-option" data-category="beach" data-icon="🏖️">
+                                                <div class="category-icon">🏖️</div>
+                                                <span>Beach</span>
+                                            </div>
+                                            <div class="subcategory-option" data-category="kayaking" data-icon="🛶">
+                                                <div class="category-icon">🛶</div>
+                                                <span>Kayaking</span>
+                                            </div>
+                                            <div class="subcategory-option" data-category="rock-climbing" data-icon="🧗">
+                                                <div class="category-icon">🧗</div>
+                                                <span>Rock Climbing</span>
+                                            </div>
+                                            <div class="subcategory-option" data-category="bike-ride" data-icon="🚴">
+                                                <div class="category-icon">🚴</div>
+                                                <span>Bike Ride</span>
+                                            </div>
+                                            <div class="subcategory-option" data-category="stargazing" data-icon="⭐">
+                                                <div class="category-icon">⭐</div>
+                                                <span>Stargazing</span>
+                                            </div>
+                                            <div class="subcategory-option" data-category="bonfire" data-icon="🔥">
+                                                <div class="category-icon">🔥</div>
+                                                <span>Bonfire</span>
+                                            </div>
+                                            <div class="subcategory-option" data-category="outdoor-yoga" data-icon="🧘">
+                                                <div class="category-icon">🧘</div>
+                                                <span>Outdoor Yoga</span>
+                                            </div>
+                                            <div class="subcategory-option" data-category="bird-watching" data-icon="🐦">
+                                                <div class="category-icon">🐦</div>
+                                                <span>Bird Watching</span>
+                                            </div>
+                                            <div class="subcategory-option" data-category="photography" data-icon="📸">
+                                                <div class="category-icon">📸</div>
+                                                <span>Photography</span>
+                                            </div>
+                                            <div class="subcategory-option" data-category="gardening" data-icon="🌱">
+                                                <div class="category-icon">🌱</div>
+                                                <span>Gardening</span>
+                                            </div>
+                                            <div class="subcategory-option" data-category="outdoor-games" data-icon="🎯">
+                                                <div class="category-icon">🎯</div>
+                                                <span>Outdoor Games</span>
+                                            </div>
+                                        </div>
                                 </div>
-                                <div class="category-option" data-category="golf" data-icon="⛳">
-                                    <div class="category-icon">⛳</div>
-                                    <span>Golf</span>
                                 </div>
                             </div>
                         </div>
@@ -234,10 +706,19 @@
                         </div>
                         <div class="form-group">
                             <label for="eventLimit">People Limit</label>
-                            <div class="number-input-container">
-                                <button type="button" class="number-btn" id="decreaseLimit">-</button>
-                                <input type="number" id="eventLimit" name="limit" min="3" value="3" required readonly>
-                                <button type="button" class="number-btn" id="increaseLimit">+</button>
+                            <div class="limit-options">
+                                <div class="number-input-container">
+                                    <button type="button" class="number-btn" id="decreaseLimit">-</button>
+                                    <input type="number" id="eventLimit" name="limit" min="3" value="3" required readonly>
+                                    <button type="button" class="number-btn" id="increaseLimit">+</button>
+                                </div>
+                                <div class="unlimited-option">
+                                    <label class="unlimited-checkbox">
+                                        <input type="checkbox" id="unlimitedAttendees" name="unlimited">
+                                        <span class="checkmark"></span>
+                                        <span class="unlimited-text">Unlimited</span>
+                                    </label>
+                                </div>
                             </div>
                         </div>
                         <div class="form-group">
@@ -247,7 +728,7 @@
                             <div class="form-actions">
                                 <button type="button" class="back-btn" id="backToCategory">Back</button>
                                 <button type="button" class="cancel-btn" id="cancelAddEvent">Cancel</button>
-                                <button type="submit" class="create-btn">Create Event</button>
+                                <button type="submit" class="create-btn">Create Hangout</button>
                             </div>
                         </div>
                     </form>
@@ -284,6 +765,138 @@
             </div>
         </div>
 
+        <!-- Messaging Modal -->
+        <div class="modal" id="messagingModal">
+            <div class="modal-content messaging-modal">
+                <div class="modal-header">
+                    <h3 id="messagingModalTitle"></h3>
+                    <button class="close-btn" id="closeMessagingModal">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="messages-thread" id="messagesThread">
+                        <!-- Messages will be populated by JavaScript -->
+                    </div>
+                    <div class="message-input-container">
+                        <input type="text" id="messageInput" placeholder="Type your message..." class="message-input">
+                        <button class="send-btn" id="sendMessageBtn">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- New Hangout Window Modal -->
+        <div class="modal" id="newHangoutModal">
+            <div class="modal-content new-hangout-modal">
+                <div class="modal-header">
+                    <h3>Quick Hangout</h3>
+                    <button class="close-btn" id="closeNewHangoutModal">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="quick-hangout-form">
+                        <div class="hangout-type-selector">
+                            <h4>What do you want to do?</h4>
+                            <div class="hangout-types">
+                                <div class="hangout-type" data-type="coffee">
+                                    <div class="type-icon">☕</div>
+                                    <span>Coffee Chat</span>
+                                </div>
+                                <div class="hangout-type" data-type="lunch">
+                                    <div class="type-icon">🍽️</div>
+                                    <span>Lunch</span>
+                                </div>
+                                <div class="hangout-type" data-type="walk">
+                                    <div class="type-icon">🚶</div>
+                                    <span>Walk</span>
+                                </div>
+                                <div class="hangout-type" data-type="study">
+                                    <div class="type-icon">📚</div>
+                                    <span>Study</span>
+                                </div>
+                                <div class="hangout-type" data-type="game">
+                                    <div class="type-icon">🎮</div>
+                                    <span>Game</span>
+                                </div>
+                                <div class="hangout-type" data-type="movie">
+                                    <div class="type-icon">🎬</div>
+                                    <span>Movie</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="hangout-details" id="hangoutDetails" style="display: none;">
+                            <div class="selected-type" id="selectedType">
+                                <span class="type-icon" id="selectedTypeIcon"></span>
+                                <span id="selectedTypeName"></span>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="quickEventTitle">Title</label>
+                                <input type="text" id="quickEventTitle" placeholder="Enter hangout title">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="quickEventTime">When?</label>
+                                <select id="quickEventTime">
+                                    <option value="now">Right now</option>
+                                    <option value="1hour">In 1 hour</option>
+                                    <option value="2hours">In 2 hours</option>
+                                    <option value="tomorrow">Tomorrow</option>
+                                    <option value="custom">Custom time</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group" id="customTimeGroup" style="display: none;">
+                                <label for="customDateTime">Date & Time</label>
+                                <input type="datetime-local" id="customDateTime">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="quickEventLocation">Where?</label>
+                                <input type="text" id="quickEventLocation" placeholder="Enter location">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="quickEventLimit">How many people?</label>
+                                <div class="limit-buttons">
+                                    <button type="button" class="limit-btn" data-limit="3">3</button>
+                                    <button type="button" class="limit-btn" data-limit="5">5</button>
+                                    <button type="button" class="limit-btn" data-limit="10">10</button>
+                                    <button type="button" class="limit-btn" data-limit="unlimited">∞</button>
+                                </div>
+                            </div>
+                            
+                            <div class="form-actions">
+                                <button type="button" class="back-to-types-btn" id="backToTypes">Back</button>
+                                <button type="button" class="create-quick-hangout-btn" id="createQuickHangout">Create Hangout</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    <!-- Tour Overlay -->
+    <div class="tour-overlay" id="tourOverlay" style="display: none;">
+        <div class="tour-spotlight" id="tourSpotlight"></div>
+        <div class="tour-tooltip" id="tourTooltip">
+            <div class="tour-tooltip-content">
+                <div class="tour-step-counter" id="tourStepCounter">Step 1 of 4</div>
+                <h3 class="tour-title" id="tourTitle">Welcome to We Should Hangout!</h3>
+                <p class="tour-description" id="tourDescription">Let's take a quick tour of the main features.</p>
+                <div class="tour-buttons">
+                    <button class="tour-btn tour-skip-btn" id="tourSkipBtn">Skip Tour</button>
+                    <button class="tour-btn tour-next-btn" id="tourNextBtn">Next</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>

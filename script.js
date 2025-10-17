@@ -1,113 +1,247 @@
-// Sample events data for BYU student
+// Sample events data for college students
 const sampleEvents = [
     {
         id: 1,
-        title: "Game Night",
+        title: "College Football Watch Party",
         date: getTodayDate(),
         time: "19:00", // 7:00 PM
-        location: "WSC 3220",
-        limit: 8,
-        description: "Board games and pizza! Bring your favorite games and let's have some fun.",
-        attendees: ["Sarah", "Johnson", "Chen"],
-        icon: "🎲",
-        creator: "Sarah"
+        location: "Student Union TV Lounge",
+        limit: 12,
+        description: "Watch the big game together! Bring snacks and drinks. We'll have the game on the big screen with surround sound.",
+        attendees: ["Sarah", "Mike", "Alex"],
+        icon: "🏈",
+        creator: "Sarah",
+        messages: [
+            {
+                id: 1,
+                sender: "Sarah",
+                text: "Hey everyone! Just a reminder that we're meeting in the Student Union TV Lounge. Bring snacks and drinks!",
+                timestamp: new Date(Date.now() - 2 * 60 * 60 * 1000), // 2 hours ago
+                isHost: true
+            },
+            {
+                id: 2,
+                sender: "Mike",
+                text: "Thanks for the reminder! I'll bring some chips and drinks.",
+                timestamp: new Date(Date.now() - 1.5 * 60 * 60 * 1000), // 1.5 hours ago
+                isHost: false
+            }
+        ]
     },
     {
         id: 2,
         title: "Pickup Basketball",
         date: getTomorrowDate(),
         time: "18:00",
-        location: "RB Gym",
+        location: "Student Recreation Center",
         limit: 10,
-        description: "Pickup basketball game. All skill levels welcome!",
-        attendees: ["Jake", "Smith", "Kim", "Davis"],
+        description: "Pickup basketball game. All skill levels welcome! Meet at the main court.",
+        attendees: ["Jake", "Marcus", "Tyler", "Jordan"],
         icon: "🏀",
         creator: "Jake"
     },
     {
+        id: 3,
+        title: "Coffee & Chat",
+        date: getCurrentWeekDate(1), // Tuesday
+        time: "10:00",
+        location: "Starbucks Downtown",
+        limit: 8,
+        description: "Casual coffee meetup downtown! Great way to meet new people and chat.",
+        attendees: ["Emma", "Sophia", "David"],
+        icon: "☕",
+        creator: "Emma"
+    },
+    {
         id: 4,
-        title: "Y Mountain Hike",
+        title: "Hiking Trail",
         date: getCurrentWeekDate(6), // Saturday
-        time: "07:00",
-        location: "Y Mountain Trailhead",
+        time: "08:00",
+        location: "Riverside Park Trail",
         limit: 12,
-        description: "Early morning hike to the Y! Bring water and good shoes. Great for exercise and views!",
-        attendees: ["Wang", "Brown", "Lee"],
+        description: "Morning hike at the local park! Bring water and good shoes. Easy 3-mile trail.",
+        attendees: ["Alex", "Maya", "Chris", "You"],
         icon: "🥾",
-        creator: "Wang"
+        creator: "Alex",
+        messages: [
+            {
+                id: 6,
+                sender: "Alex",
+                text: "Good morning everyone! The weather looks perfect for our hike today. Meet at the trailhead at 8 AM sharp!",
+                timestamp: new Date(Date.now() - 1 * 60 * 60 * 1000), // 1 hour ago
+                isHost: true
+            },
+            {
+                id: 7,
+                sender: "Maya",
+                text: "I'm so excited! I've been looking forward to this all week. Should I bring extra water?",
+                timestamp: new Date(Date.now() - 45 * 60 * 1000), // 45 minutes ago
+                isHost: false
+            },
+            {
+                id: 8,
+                sender: "You",
+                text: "I'll be there! Bringing my camera for some nature shots. See you all soon!",
+                timestamp: new Date(Date.now() - 30 * 60 * 1000), // 30 minutes ago
+                isHost: false
+            }
+        ]
     },
     {
         id: 5,
-        title: "Secret Hitler",
+        title: "Game Night",
         date: getCurrentWeekDate(0), // Sunday
         time: "19:30",
-        location: "Campus Plaza Apt 2B",
+        location: "Dorm Common Room",
         limit: 8,
-        description: "Secret Hitler game night! Bring snacks and get ready for some intense political intrigue!",
-        attendees: ["You", "Johnson", "Martinez", "Kim", "Chen"],
-        icon: "🎭",
-        creator: "You"
+        description: "Board games and snacks! We have Cards Against Humanity, Settlers of Catan, and more!",
+        attendees: ["You", "Jordan", "Taylor", "Sam", "Casey"],
+        icon: "🎲",
+        creator: "You",
+        messages: [
+            {
+                id: 3,
+                sender: "You",
+                text: "Game night is happening tonight! I've got snacks and drinks ready. See you all at 7:30!",
+                timestamp: new Date(Date.now() - 4 * 60 * 60 * 1000), // 4 hours ago
+                isHost: true
+            },
+            {
+                id: 4,
+                sender: "Jordan",
+                text: "Can't wait! What games are we playing?",
+                timestamp: new Date(Date.now() - 3.5 * 60 * 60 * 1000), // 3.5 hours ago
+                isHost: false
+            },
+            {
+                id: 5,
+                sender: "Taylor",
+                text: "I'm bringing my favorite card game too!",
+                timestamp: new Date(Date.now() - 2 * 60 * 60 * 1000), // 2 hours ago
+                isHost: false
+            }
+        ]
+    },
+    {
+        id: 6,
+        title: "Tennis Doubles",
+        date: getCurrentWeekDate(3), // Wednesday
+        time: "17:00",
+        location: "Campus Tennis Courts",
+        limit: 4,
+        description: "Tennis doubles match! All skill levels welcome. We have extra rackets.",
+        attendees: ["Ryan", "Jessica"],
+        icon: "🎾",
+        creator: "Ryan"
     },
     {
         id: 7,
-        title: "Pickleball Tournament",
-        date: getCurrentWeekDate(6), // Saturday
-        time: "17:00",
-        location: "RB Gym",
-        limit: 12,
-        description: "Pickleball tournament! All skill levels welcome. Bring your paddle if you have one!",
-        attendees: ["You", "Mike", "Sarah", "Alex", "Emma", "David"],
-        icon: "🏓",
+        title: "Movie Night",
+        date: getCurrentWeekDate(5), // Friday
+        time: "20:00",
+        location: "Student Union Theater",
+        limit: 20,
+        description: "Free movie screening! This week: The latest blockbuster. Popcorn provided!",
+        attendees: ["You", "Mike", "Sarah", "Alex", "Emma", "David", "Taylor"],
+        icon: "🎬",
         creator: "Mike"
     },
     {
         id: 8,
-        title: "Local Museum Tour",
+        title: "Art Museum Visit",
         date: getCurrentWeekNextDate(1), // Next Monday
-        time: "10:00",
-        location: "Provo Museum of Art",
+        time: "14:00",
+        location: "City Art Museum",
         limit: 15,
-        description: "Tour of the local museum! Meet at the museum entrance. Great way to explore local culture!",
-        attendees: ["Johnson", "Smith", "Davis", "Kim"],
+        description: "Free student admission! Meet at the museum entrance. Great way to explore local culture!",
+        attendees: ["Sophia", "Marcus", "Jessica", "Chris"],
         icon: "🏛️",
-        creator: "Johnson"
+        creator: "Sophia"
     },
     {
         id: 9,
         title: "Poker Night",
         date: getCurrentWeekNextDate(5), // Next Friday
         time: "20:00",
-        location: "Riviera Apts 4C",
+        location: "Off-Campus House",
         limit: 6,
         description: "Poker night at my place! Bring snacks and drinks. No money, just for fun!",
-        attendees: ["Smith", "Davis", "Kim"],
+        attendees: ["Tyler", "Jordan", "Sam"],
         icon: "🃏",
-        creator: "Smith"
+        creator: "Tyler"
     },
     {
         id: 10,
-        title: "Volleyball Night",
+        title: "Volleyball Tournament",
         date: getCurrentWeekNextDate(2), // Next Tuesday
         time: "19:30",
-        location: "RB Gym",
+        location: "Student Recreation Center",
         limit: 12,
-        description: "Volleyball night! Come play and have fun with friends.",
-        attendees: ["Johnson", "Martinez", "Kim", "Chen"],
+        description: "Volleyball tournament! Teams will be formed on the spot. Prizes for winners!",
+        attendees: ["Marcus", "Taylor", "Casey", "Ryan"],
         icon: "🏐",
-        creator: "Johnson"
+        creator: "Marcus"
     },
     {
         id: 11,
-        title: "BBQ at the Pool",
+        title: "Food Truck Festival",
         date: getCurrentWeekNextDate(6), // Next Saturday
-        time: "17:00",
-        location: "Campus Plaza Pool",
+        time: "12:00",
+        location: "Downtown Food Truck Park",
         limit: 15,
-        description: "BBQ at the apartment pool! Bring swimsuits and we'll grill burgers. Pool access included!",
-        attendees: ["Wang", "Brown", "Lee", "Martinez"],
+        description: "Food truck festival downtown! Try different cuisines and hang out. Meet at the main entrance.",
+        attendees: ["Emma", "David", "Maya", "Jessica"],
         icon: "🍔",
-        creator: "Wang"
+        creator: "Emma"
     },
+    {
+        id: 12,
+        title: "Photography Walk",
+        date: getCurrentWeekNextDate(4), // Next Thursday
+        time: "16:00",
+        location: "Campus Gardens",
+        limit: 8,
+        description: "Photography walk around campus! Bring your camera or phone. Great for beginners!",
+        attendees: ["Alex", "Sophia", "Chris"],
+        icon: "📸",
+        creator: "Alex"
+    },
+    {
+        id: 13,
+        title: "Trivia Night",
+        date: getCurrentWeekNextDate(3), // Next Wednesday
+        time: "19:00",
+        location: "Campus Pub",
+        limit: 20,
+        description: "Weekly trivia night at the campus pub! Form teams and compete for prizes!",
+        attendees: ["You", "Mike", "Sarah", "Taylor", "Sam", "Casey", "Ryan"],
+        icon: "🧠",
+        creator: "Mike"
+    },
+    {
+        id: 14,
+        title: "Beach Volleyball",
+        date: getCurrentWeekNextDate(0), // Next Sunday
+        time: "15:00",
+        location: "City Beach",
+        limit: 8,
+        description: "Beach volleyball at the city beach! Bring sunscreen and water. All skill levels welcome!",
+        attendees: ["Jordan", "Tyler", "Marcus"],
+        icon: "🏖️",
+        creator: "Jordan"
+    },
+    {
+        id: 15,
+        title: "Concert at Local Venue",
+        date: getCurrentWeekNextDate(5), // Next Friday
+        time: "21:00",
+        location: "Downtown Music Hall",
+        limit: 10,
+        description: "Local band concert! Student discount available. Meet at the venue entrance.",
+        attendees: ["David", "Maya", "Jessica", "Chris"],
+        icon: "🎵",
+        creator: "David"
+    }
 ];
 
 // Helper functions for dates - Week-based system
@@ -217,7 +351,9 @@ function showToast(message, type = 'success', duration = 3000) {
 let events = [...sampleEvents];
 let currentEventId = null;
 let searchQuery = '';
+let currentFilter = 'all';
 let currentSection = 'hangout-hub';
+let currentMessagingEventId = null;
 
 // DOM elements
 const eventsList = document.getElementById('eventsList');
@@ -236,12 +372,25 @@ const backToCategory = document.getElementById('backToCategory');
 const searchEvents = document.getElementById('searchEvents');
 const searchContainer = document.getElementById('searchContainer');
 const searchIconBtn = document.getElementById('searchIconBtn');
+const filterBtn = document.getElementById('filterBtn');
+const filterContainer = document.getElementById('filterContainer');
 // Profile elements are now handled dynamically
 
 // Initialize the app
 document.addEventListener('DOMContentLoaded', function() {
+    // Initialize filter with "All Categories" selected
+    const allFilterOption = document.querySelector('.filter-option[data-category="all"]');
+    if (allFilterOption) {
+        allFilterOption.classList.add('selected');
+    }
+    
     renderEvents();
     setupEventListeners();
+    updateUnreadBadge(); // Initialize unread badge
+    setupNewHangoutWindow(); // Initialize new hangout window
+    
+    // Initialize tour for first-time users
+    initializeTour();
     
     // Test function for debugging
     window.testNavigation = function() {
@@ -267,10 +416,21 @@ function setupEventListeners() {
 
     closeModal.addEventListener('click', () => {
         eventModal.classList.remove('show');
+        // Navigate to hub section
+        handleNavigation('hangout-hub');
     });
 
     closeAddModal.addEventListener('click', () => {
         addEventModal.classList.remove('show');
+        // Reset search and show all categories
+        document.getElementById('categorySearch').value = '';
+        document.querySelectorAll('.category-group').forEach(group => {
+            group.style.display = 'block';
+            group.classList.remove('open');
+            group.querySelectorAll('.subcategory-option').forEach(option => {
+                option.style.display = 'flex';
+            });
+        });
     });
 
     // Badge modal close
@@ -281,18 +441,43 @@ function setupEventListeners() {
 
     cancelAddEvent.addEventListener('click', () => {
         addEventModal.classList.remove('show');
+        // Reset search and show all categories
+        document.getElementById('categorySearch').value = '';
+        document.querySelectorAll('.category-group').forEach(group => {
+            group.style.display = 'block';
+            group.classList.remove('open');
+            group.querySelectorAll('.subcategory-option').forEach(option => {
+                option.style.display = 'flex';
+            });
+        });
     });
 
     // Close modals when clicking outside
     eventModal.addEventListener('click', (e) => {
         if (e.target === eventModal) {
             eventModal.classList.remove('show');
+            // Navigate to hub section
+            handleNavigation('hangout-hub');
         }
     });
 
     addEventModal.addEventListener('click', (e) => {
         if (e.target === addEventModal) {
             addEventModal.classList.remove('show');
+            // Reset search and show all categories
+            document.getElementById('categorySearch').value = '';
+            document.querySelectorAll('.category-group').forEach(group => {
+                group.style.display = 'block';
+                group.classList.remove('open');
+                group.querySelectorAll('.subcategory-option').forEach(option => {
+                    option.style.display = 'flex';
+                });
+            });
+            // Reset unlimited attendees checkbox
+            document.getElementById('unlimitedAttendees').checked = false;
+            document.getElementById('eventLimit').disabled = false;
+            document.getElementById('decreaseLimit').disabled = false;
+            document.getElementById('increaseLimit').disabled = false;
         }
     });
 
@@ -329,22 +514,84 @@ function setupEventListeners() {
         handleNavigation('hangout-hub');
     });
 
-    // Category selection
-    const categoryOptions = document.querySelectorAll('.category-option');
-    categoryOptions.forEach(option => {
+    // Message event button
+    const messageEventBtn = document.getElementById('messageEventBtn');
+    messageEventBtn.addEventListener('click', () => {
+        if (currentEventId) {
+            openMessaging(currentEventId);
+        }
+    });
+
+    // Messaging modal close
+    const closeMessagingModal = document.getElementById('closeMessagingModal');
+    closeMessagingModal.addEventListener('click', () => {
+        document.getElementById('messagingModal').classList.remove('show');
+    });
+
+    // Send message button
+    const sendMessageBtn = document.getElementById('sendMessageBtn');
+    sendMessageBtn.addEventListener('click', () => {
+        const messageInput = document.getElementById('messageInput');
+        const text = messageInput.value.trim();
+        if (text && currentMessagingEventId) {
+            sendMessage(currentMessagingEventId, text);
+        }
+    });
+
+    // Send message on Enter key
+    const messageInput = document.getElementById('messageInput');
+    messageInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            const text = messageInput.value.trim();
+            if (text && currentMessagingEventId) {
+                sendMessage(currentMessagingEventId, text);
+            }
+        }
+    });
+
+    // Close messaging modal when clicking outside
+    const messagingModal = document.getElementById('messagingModal');
+    messagingModal.addEventListener('click', (e) => {
+        if (e.target === messagingModal) {
+            messagingModal.classList.remove('show');
+        }
+    });
+
+    // Category selection - handle subcategory options
+    const subcategoryOptions = document.querySelectorAll('.subcategory-option');
+    subcategoryOptions.forEach(option => {
         option.addEventListener('click', handleCategorySelection);
     });
+
+    // Category search functionality
+    const categorySearch = document.getElementById('categorySearch');
+    categorySearch.addEventListener('input', handleCategorySearch);
 
     // Back to category button
     backToCategory.addEventListener('click', () => {
         categorySelection.style.display = 'block';
         eventDetailsForm.style.display = 'none';
+        // Reset search and show all categories
+        document.getElementById('categorySearch').value = '';
+        document.querySelectorAll('.category-group').forEach(group => {
+            group.style.display = 'block';
+            group.classList.remove('open');
+            group.querySelectorAll('.subcategory-option').forEach(option => {
+                option.style.display = 'flex';
+            });
+        });
+        // Reset unlimited attendees checkbox
+        document.getElementById('unlimitedAttendees').checked = false;
+        document.getElementById('eventLimit').disabled = false;
+        document.getElementById('decreaseLimit').disabled = false;
+        document.getElementById('increaseLimit').disabled = false;
     });
 
     // Number input buttons
     const decreaseLimit = document.getElementById('decreaseLimit');
     const increaseLimit = document.getElementById('increaseLimit');
     const eventLimit = document.getElementById('eventLimit');
+    const unlimitedAttendees = document.getElementById('unlimitedAttendees');
 
     decreaseLimit.addEventListener('click', () => {
         const currentValue = parseInt(eventLimit.value);
@@ -360,6 +607,30 @@ function setupEventListeners() {
         }
     });
 
+    // Handle unlimited attendees checkbox
+    unlimitedAttendees.addEventListener('change', () => {
+        if (unlimitedAttendees.checked) {
+            eventLimit.value = 999; // Set a high number for unlimited
+            eventLimit.disabled = true;
+            decreaseLimit.disabled = true;
+            increaseLimit.disabled = true;
+        } else {
+            eventLimit.disabled = false;
+            decreaseLimit.disabled = false;
+            increaseLimit.disabled = false;
+            eventLimit.value = 3; // Reset to minimum
+        }
+    });
+
+    // Filter button toggle
+    filterBtn.addEventListener('click', () => {
+        if (filterContainer.style.display === 'none') {
+            filterContainer.style.display = 'block';
+        } else {
+            filterContainer.style.display = 'none';
+        }
+    });
+
     // Search icon toggle
     searchIconBtn.addEventListener('click', () => {
         if (searchContainer.style.display === 'none') {
@@ -371,6 +642,26 @@ function setupEventListeners() {
             searchQuery = '';
             renderEvents();
         }
+    });
+
+    // Filter option selection
+    const filterOptions = document.querySelectorAll('.filter-option');
+    filterOptions.forEach(option => {
+        option.addEventListener('click', () => {
+            // Remove selected class from all options
+            filterOptions.forEach(opt => opt.classList.remove('selected'));
+            // Add selected class to clicked option
+            option.classList.add('selected');
+            
+            // Update current filter
+            currentFilter = option.dataset.category;
+            
+            // Re-render events with new filter
+            renderEvents();
+            
+            // Hide filter dropdown
+            filterContainer.style.display = 'none';
+        });
     });
 
     // Search functionality
@@ -398,35 +689,46 @@ function setupEventListeners() {
 
 // Render events list with time-based headers
 function renderEvents() {
-    // Filter events based on search query
+    // Filter events based on search query and category filter
     let filteredEvents = events;
+    
+    // Apply search filter
     if (searchQuery) {
-        filteredEvents = events.filter(event => 
+        filteredEvents = filteredEvents.filter(event => 
             event.title.toLowerCase().includes(searchQuery) ||
             event.location.toLowerCase().includes(searchQuery) ||
             event.description.toLowerCase().includes(searchQuery)
         );
+    }
+    
+    // Apply category filter
+    if (currentFilter !== 'all') {
+        filteredEvents = filteredEvents.filter(event => {
+            // Map event icons to categories for filtering
+            const eventIcon = event.icon || getEventIcon(event.title);
+            return getCategoryFromIcon(eventIcon) === currentFilter;
+        });
     }
 
     if (filteredEvents.length === 0) {
         eventsList.innerHTML = searchQuery ? `
             <div class="empty-state">
                 <i class="fas fa-search"></i>
-                <h3>No events found</h3>
-                <p>Try a different search term or create a new event! 🔍</p>
+                <h3>No hangouts found</h3>
+                <p>Try a different search term or create a new hangout! 🔍</p>
                 <button class="create-event-btn" onclick="document.getElementById('addEventBtn').click()">
                     <i class="fas fa-plus"></i>
-                    Create Event
+                    Create Hangout
                 </button>
             </div>
         ` : `
             <div class="empty-state">
                 <i class="fas fa-calendar-plus"></i>
-                <h3>No events yet</h3>
-                <p>Be the first to create an event and start hanging out! 🎉</p>
+                <h3>No hangouts yet</h3>
+                <p>Be the first to create a hangout and start hanging out! 🎉</p>
                 <button class="create-event-btn" onclick="document.getElementById('addEventBtn').click()">
                     <i class="fas fa-plus"></i>
-                    Create Event
+                    Create Hangout
                 </button>
             </div>
         `;
@@ -454,7 +756,8 @@ function renderEvents() {
 
     const weekendEvents = filteredEvents.filter(event => {
         const eventDate = new Date(event.date + 'T' + event.time);
-        return eventDate >= tomorrow && eventDate < nextMonday;
+        // Exclude events that are in the next 24 hours (they should show in that section instead)
+        return eventDate >= tomorrow && eventDate < nextMonday && eventDate > next24Hours;
     }).sort((a, b) => {
         const dateA = new Date(a.date + 'T' + a.time);
         const dateB = new Date(b.date + 'T' + b.time);
@@ -531,7 +834,8 @@ function openEventModal(eventId) {
     document.getElementById('modalEventDate').textContent = formatDate(event.date);
     document.getElementById('modalEventTime').textContent = formatTime(event.time);
     document.getElementById('modalEventLocation').textContent = event.location;
-    document.getElementById('modalEventLimit').textContent = `${event.attendees.length}/${event.limit} people`;
+    const limitText = event.limit >= 999 ? 'Unlimited' : event.limit;
+    document.getElementById('modalEventLimit').textContent = `${event.attendees.length}/${limitText} people`;
     
     // Render attendees
     const attendeesList = document.getElementById('attendeesList');
@@ -570,7 +874,7 @@ function handleJoinEvent() {
         event.attendees = event.attendees.filter(attendee => attendee !== currentUser);
     } else {
         // Join event
-        if (event.attendees.length >= event.limit) {
+        if (event.limit < 999 && event.attendees.length >= event.limit) {
             showToast('This event is full!', 'error');
             return;
         }
@@ -584,9 +888,9 @@ function handleJoinEvent() {
     
     // Show success message
     if (!isUserAttending) {
-        showToast('Successfully joined the event!', 'success');
+        showToast('Successfully joined the hangout!', 'success');
     } else {
-        showToast('Left the event', 'success');
+        showToast('Left the hangout', 'success');
     }
 }
 
@@ -623,6 +927,100 @@ function getEventIcon(title) {
     }
 }
 
+// Function to get category from icon
+function getCategoryFromIcon(icon) {
+    // Sports icons
+    if (['🏀', '⚽', '🎾', '🏓', '🏐', '⛳', '🥏', '🏸', '🥎', '🏈', '🏊', '🏃', '🚴', '🏋️'].includes(icon)) {
+        return 'sports';
+    }
+    // Entertainment icons
+    if (['🎬', '🎲', '🎮', '🎤', '🧠', '🔍', '🕹️', '😂', '💃', '🎩', '🎭', '🎪', '🎵', '🃏'].includes(icon)) {
+        return 'entertainment';
+    }
+    // Food & Dining icons
+    if (['🍽️', '☕', '🍖', '🥘', '👨‍🍳'].includes(icon)) {
+        return 'food';
+    }
+    // Social icons
+    if (['🎉', '🤝', '💼', '💕', '🍹', '🍻', '🗣️', '📖', '🍷', '🥞', '🧊'].includes(icon)) {
+        return 'social';
+    }
+    // Fitness icons
+    if (['💪', '🏋️', '🧘', '🏃', '🚴', '🏊'].includes(icon)) {
+        return 'fitness';
+    }
+    // Arts & Culture icons
+    if (['🏛️', '🖼️', '🎵', '🎭', '📸', '🎨', '📖', '💃', '🏺', '🗿', '🎼', '📚', '🎬', '🎪', '🚶'].includes(icon)) {
+        return 'arts';
+    }
+    // Education icons
+    if (['📚', '🔧', '🎓', '🗣️'].includes(icon)) {
+        return 'education';
+    }
+    // Outdoor icons
+    if (['🥾', '⛺', '🧺', '🎣', '🏖️', '🛶', '🧗', '🚴', '⭐', '🔥', '🧘', '🐦', '📸', '🌱', '🎯'].includes(icon)) {
+        return 'outdoor';
+    }
+    
+    return 'all'; // Default to all if no category matches
+}
+
+// Toggle category dropdown
+function toggleCategoryDropdown(categoryName) {
+    const dropdown = document.getElementById(`${categoryName}-dropdown`);
+    const categoryGroup = dropdown.closest('.category-group');
+    
+    // Close all other dropdowns
+    document.querySelectorAll('.category-group').forEach(group => {
+        if (group !== categoryGroup) {
+            group.classList.remove('open');
+        }
+    });
+    
+    // Toggle current dropdown
+    categoryGroup.classList.toggle('open');
+}
+
+// Handle category search
+function handleCategorySearch(e) {
+    const searchQuery = e.target.value.toLowerCase();
+    const categoryGroups = document.querySelectorAll('.category-group');
+    
+    categoryGroups.forEach(group => {
+        const header = group.querySelector('.category-header span').textContent.toLowerCase();
+        const subcategories = group.querySelectorAll('.subcategory-option');
+        let hasMatchingSubcategory = false;
+        
+        subcategories.forEach(subcategory => {
+            const subcategoryName = subcategory.querySelector('span').textContent.toLowerCase();
+            const subcategoryIcon = subcategory.querySelector('.category-icon').textContent;
+            
+            // Check if the search query matches the subcategory name or icon
+            const matches = subcategoryName.includes(searchQuery) || 
+                          subcategoryIcon.includes(searchQuery) ||
+                          searchQuery === '';
+            
+            if (matches) {
+                subcategory.style.display = 'flex';
+                hasMatchingSubcategory = true;
+            } else {
+                subcategory.style.display = 'none';
+            }
+        });
+        
+        // Show/hide entire category group based on matches
+        if (searchQuery === '' || header.includes(searchQuery) || hasMatchingSubcategory) {
+            group.style.display = 'block';
+            // Auto-open dropdown if there are matching subcategories
+            if (hasMatchingSubcategory && searchQuery !== '') {
+                group.classList.add('open');
+            }
+        } else {
+            group.style.display = 'none';
+        }
+    });
+}
+
 // Handle category selection
 function handleCategorySelection(e) {
     const selectedOption = e.currentTarget;
@@ -630,8 +1028,8 @@ function handleCategorySelection(e) {
     const icon = selectedOption.dataset.icon;
     const categoryName = selectedOption.querySelector('span').textContent;
     
-    // Remove selected class from all options
-    document.querySelectorAll('.category-option').forEach(option => {
+    // Remove selected class from all subcategory options
+    document.querySelectorAll('.subcategory-option').forEach(option => {
         option.classList.remove('selected');
     });
     
@@ -699,7 +1097,7 @@ function handleAddEvent(e) {
     const eventDateTime = new Date(newEvent.date + 'T' + newEvent.time);
     const now = new Date();
     if (eventDateTime < now) {
-        showToast('Event date and time must be in the future!', 'warning');
+        showToast('Hangout date and time must be in the future!', 'warning');
         return;
     }
     
@@ -713,8 +1111,18 @@ function handleAddEvent(e) {
     // Reset category selection
     categorySelection.style.display = 'block';
     eventDetailsForm.style.display = 'none';
-    document.querySelectorAll('.category-option').forEach(option => {
+    document.querySelectorAll('.subcategory-option').forEach(option => {
         option.classList.remove('selected');
+    });
+    
+    // Reset search and show all categories
+    document.getElementById('categorySearch').value = '';
+    document.querySelectorAll('.category-group').forEach(group => {
+        group.style.display = 'block';
+        group.classList.remove('open');
+        group.querySelectorAll('.subcategory-option').forEach(option => {
+            option.style.display = 'flex';
+        });
     });
     
     // Re-render events
@@ -723,7 +1131,7 @@ function handleAddEvent(e) {
     updateProfileStats();
     
     // Show success message
-    showToast('Event created successfully!', 'success');
+    showToast('Hangout created successfully!', 'success');
 }
 
 // Handle navigation
@@ -731,6 +1139,7 @@ function handleNavigation(section) {
     // Hide all sections
     document.getElementById('hangoutHub').style.display = 'none';
     document.getElementById('myEvents').style.display = 'none';
+    document.getElementById('messages').style.display = 'none';
     document.getElementById('profile').style.display = 'none';
     
     // Show the selected section
@@ -742,6 +1151,10 @@ function handleNavigation(section) {
         document.getElementById('myEvents').style.display = 'block';
         currentSection = 'my-events';
         renderMyEvents();
+    } else if (section === 'messages') {
+        document.getElementById('messages').style.display = 'block';
+        currentSection = 'messages';
+        renderMessagesTab();
     } else if (section === 'profile') {
         document.getElementById('profile').style.display = 'block';
         currentSection = 'profile';
@@ -767,8 +1180,8 @@ function renderMyEvents() {
         attendingEventsList.innerHTML = `
             <div class="empty-state">
                 <i class="fas fa-calendar-plus"></i>
-                <h3>No events joined yet</h3>
-                <p>Join your first event to get started! 🎉</p>
+                <h3>No hangouts joined yet</h3>
+                <p>Join your first hangout to get started! 🎉</p>
             </div>
         `;
     } else {
@@ -781,8 +1194,8 @@ function renderMyEvents() {
         hostedEventsList.innerHTML = `
             <div class="empty-state">
                 <i class="fas fa-calendar-plus"></i>
-                <h3>No events created yet</h3>
-                <p>Create your first event to get started! 🎉</p>
+                <h3>No hangouts created yet</h3>
+                <p>Create your first hangout to get started! 🎉</p>
             </div>
         `;
     } else {
@@ -1022,7 +1435,7 @@ function renderEventCardWithActions(event, showActions = false) {
                 <div><i class="fas fa-map-marker-alt"></i> ${event.location}</div>
             </div>
             <div class="event-attendees">
-                <div class="attendees-count">${event.attendees.length}/${event.limit}</div>
+                <div class="attendees-count">${event.attendees.length}/${event.limit >= 999 ? '∞' : event.limit}</div>
                 <div class="attendees-avatars">
                     ${event.attendees.slice(0, 3).map((attendee, index) => `
                         <div class="attendee-avatar" style="background-color: ${getAvatarColor(index)}">
@@ -1063,7 +1476,7 @@ function renderAttendingEventCard(event) {
                 <div><i class="fas fa-map-marker-alt"></i> ${event.location}</div>
             </div>
             <div class="event-attendees">
-                <div class="attendees-count">${event.attendees.length}/${event.limit}</div>
+                <div class="attendees-count">${event.attendees.length}/${event.limit >= 999 ? '∞' : event.limit}</div>
                 <div class="attendees-avatars">
                     ${event.attendees.slice(0, 3).map((attendee, index) => `
                         <div class="attendee-avatar" style="background-color: ${getAvatarColor(index)}">
@@ -1093,7 +1506,7 @@ function deleteEvent(eventId) {
         renderEvents();
         renderMyEvents();
         updateProfileStats();
-    showToast('Event deleted!', 'success');
+    showToast('Hangout deleted!', 'success');
 }
 
 // Leave event
@@ -1110,7 +1523,7 @@ function leaveEvent(eventId) {
     updateProfileStats();
     
     // Show success message
-    showToast('Left the event', 'success');
+    showToast('Left the hangout', 'success');
 }
 
 // Utility functions
@@ -1144,4 +1557,592 @@ document.addEventListener('DOMContentLoaded', function() {
         dateInput.min = today;
     }
 });
+
+// Messaging Functions
+
+// Open messaging modal for specific event
+function openMessaging(eventId) {
+    const event = events.find(e => e.id === eventId);
+    if (!event) return;
+    
+    currentMessagingEventId = eventId;
+    
+    // Set modal title
+    document.getElementById('messagingModalTitle').innerHTML = `<span class="event-icon">${event.icon || '🎉'}</span> ${event.title}`;
+    
+    // Render messages
+    renderMessages(eventId);
+    
+    // Show modal
+    document.getElementById('messagingModal').classList.add('show');
+}
+
+// Send message
+function sendMessage(eventId, text) {
+    if (!text.trim()) return;
+    
+    const event = events.find(e => e.id === eventId);
+    if (!event) return;
+    
+    // Add message to event
+    const newMessage = {
+        id: Date.now(),
+        sender: currentUser,
+        text: text.trim(),
+        timestamp: new Date(),
+        isHost: event.creator === currentUser
+    };
+    
+    if (!event.messages) {
+        event.messages = [];
+    }
+    
+    event.messages.push(newMessage);
+    
+    // Clear input
+    document.getElementById('messageInput').value = '';
+    
+    // Re-render messages
+    renderMessages(eventId);
+    
+    // Update messages tab if visible
+    if (currentSection === 'messages') {
+        renderMessagesTab();
+    }
+    
+    // Update unread count
+    updateUnreadBadge();
+}
+
+// Render messages in modal
+function renderMessages(eventId) {
+    const event = events.find(e => e.id === eventId);
+    if (!event) return;
+    
+    const messagesThread = document.getElementById('messagesThread');
+    
+    if (!event.messages || event.messages.length === 0) {
+        messagesThread.innerHTML = `
+            <div class="empty-messages">
+                <i class="fas fa-comments"></i>
+                <p>No messages yet. Start the conversation!</p>
+            </div>
+        `;
+        return;
+    }
+    
+    // Sort messages by timestamp
+    const sortedMessages = [...event.messages].sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
+    
+    messagesThread.innerHTML = sortedMessages.map(message => `
+        <div class="message-bubble ${message.isHost ? 'host' : 'attendee'}">
+            <div class="message-sender">${message.sender}</div>
+            <div class="message-text">${message.text}</div>
+            <div class="message-time">${formatMessageTime(message.timestamp)}</div>
+        </div>
+    `).join('');
+    
+    // Scroll to bottom
+    messagesThread.scrollTop = messagesThread.scrollHeight;
+}
+
+// Render messages tab
+function renderMessagesTab() {
+    const messagesList = document.getElementById('messagesList');
+    
+    // Get events with messages
+    const eventsWithMessages = events.filter(event => 
+        event.messages && event.messages.length > 0 && 
+        (event.attendees.includes(currentUser) || event.creator === currentUser)
+    );
+    
+    if (eventsWithMessages.length === 0) {
+        messagesList.innerHTML = `
+            <div class="empty-state">
+                <i class="fas fa-comments"></i>
+                <h3>No messages yet</h3>
+                <p>Join events to start conversations! 💬</p>
+            </div>
+        `;
+        return;
+    }
+    
+    // Sort by most recent message
+    eventsWithMessages.sort((a, b) => {
+        const aLastMessage = a.messages[a.messages.length - 1];
+        const bLastMessage = b.messages[b.messages.length - 1];
+        return new Date(bLastMessage.timestamp) - new Date(aLastMessage.timestamp);
+    });
+    
+    messagesList.innerHTML = eventsWithMessages.map(event => {
+        const lastMessage = event.messages[event.messages.length - 1];
+        const unreadCount = getUnreadCount(event.id);
+        
+        return `
+            <div class="message-event-card" onclick="openMessaging(${event.id})">
+                <div class="message-event-header">
+                    <div class="message-event-title">
+                        <span class="message-event-icon">${event.icon || '🎉'}</span>
+                        ${event.title}
+                    </div>
+                    <div class="message-event-date">${formatDate(event.date)}</div>
+                </div>
+                <div class="message-preview">${lastMessage.text}</div>
+                <div class="message-meta">
+                    <span>${lastMessage.sender} • ${formatMessageTime(lastMessage.timestamp)}</span>
+                    ${unreadCount > 0 ? `<div class="message-count">${unreadCount}</div>` : ''}
+                </div>
+            </div>
+        `;
+    }).join('');
+}
+
+// Get unread message count for event
+function getUnreadCount(eventId) {
+    const event = events.find(e => e.id === eventId);
+    if (!event || !event.messages) return 0;
+    
+    // For demo purposes, count messages not from current user as unread
+    return event.messages.filter(message => 
+        message.sender !== currentUser && 
+        new Date(message.timestamp) > new Date(Date.now() - 24 * 60 * 60 * 1000) // Last 24 hours
+    ).length;
+}
+
+// Update unread badge
+function updateUnreadBadge() {
+    const badge = document.getElementById('messagesBadge');
+    const totalUnread = events.reduce((total, event) => total + getUnreadCount(event.id), 0);
+    
+    if (totalUnread > 0) {
+        badge.textContent = totalUnread;
+        badge.style.display = 'flex';
+    } else {
+        badge.style.display = 'none';
+    }
+}
+
+// Format message time
+function formatMessageTime(timestamp) {
+    const now = new Date();
+    const messageTime = new Date(timestamp);
+    const diffInMinutes = Math.floor((now - messageTime) / (1000 * 60));
+    
+    if (diffInMinutes < 1) return 'Just now';
+    if (diffInMinutes < 60) return `${diffInMinutes}m ago`;
+    if (diffInMinutes < 1440) return `${Math.floor(diffInMinutes / 60)}h ago`;
+    return messageTime.toLocaleDateString();
+}
+
+// New Hangout Window Functions
+function setupNewHangoutWindow() {
+    const quickHangoutBtn = document.getElementById('quickHangoutBtn');
+    const newHangoutModal = document.getElementById('newHangoutModal');
+    const closeNewHangoutModal = document.getElementById('closeNewHangoutModal');
+    const hangoutTypes = document.querySelectorAll('.hangout-type');
+    const hangoutDetails = document.getElementById('hangoutDetails');
+    const backToTypes = document.getElementById('backToTypes');
+    const quickEventTime = document.getElementById('quickEventTime');
+    const customTimeGroup = document.getElementById('customTimeGroup');
+    const limitBtns = document.querySelectorAll('.limit-btn');
+    const createQuickHangout = document.getElementById('createQuickHangout');
+    
+    // Check if elements exist before adding event listeners
+    if (!quickHangoutBtn || !newHangoutModal) {
+        console.warn('New hangout window elements not found, skipping setup');
+        return;
+    }
+    
+    // Open new hangout modal
+    quickHangoutBtn.addEventListener('click', () => {
+        newHangoutModal.classList.add('show');
+        // Reset form
+        resetNewHangoutForm();
+    });
+    
+    // Close new hangout modal
+    if (closeNewHangoutModal) {
+        closeNewHangoutModal.addEventListener('click', () => {
+            newHangoutModal.classList.remove('show');
+            resetNewHangoutForm();
+        });
+    }
+    
+    // Close modal when clicking outside
+    newHangoutModal.addEventListener('click', (e) => {
+        if (e.target === newHangoutModal) {
+            newHangoutModal.classList.remove('show');
+            resetNewHangoutForm();
+        }
+    });
+    
+    // Handle hangout type selection
+    if (hangoutTypes.length > 0) {
+        hangoutTypes.forEach(type => {
+            type.addEventListener('click', () => {
+                // Remove selected class from all types
+                hangoutTypes.forEach(t => t.classList.remove('selected'));
+                // Add selected class to clicked type
+                type.classList.add('selected');
+                
+                // Update selected type display
+                const typeIcon = type.querySelector('.type-icon').textContent;
+                const typeName = type.querySelector('span').textContent;
+                const selectedTypeIcon = document.getElementById('selectedTypeIcon');
+                const selectedTypeName = document.getElementById('selectedTypeName');
+                if (selectedTypeIcon) selectedTypeIcon.textContent = typeIcon;
+                if (selectedTypeName) selectedTypeName.textContent = typeName;
+                
+                // Show hangout details
+                const typeSelector = document.querySelector('.hangout-type-selector');
+                if (typeSelector) typeSelector.style.display = 'none';
+                if (hangoutDetails) hangoutDetails.style.display = 'block';
+                
+                // Set default title based on type
+                const eventTitle = document.getElementById('quickEventTitle');
+                if (eventTitle) eventTitle.value = typeName;
+            });
+        });
+    }
+    
+    // Back to types button
+    if (backToTypes) {
+        backToTypes.addEventListener('click', () => {
+            if (hangoutDetails) hangoutDetails.style.display = 'none';
+            const typeSelector = document.querySelector('.hangout-type-selector');
+            if (typeSelector) typeSelector.style.display = 'block';
+        });
+    }
+    
+    // Handle time selection
+    if (quickEventTime) {
+        quickEventTime.addEventListener('change', (e) => {
+            if (e.target.value === 'custom') {
+                if (customTimeGroup) customTimeGroup.style.display = 'block';
+            } else {
+                if (customTimeGroup) customTimeGroup.style.display = 'none';
+            }
+        });
+    }
+    
+    // Handle limit button selection
+    if (limitBtns.length > 0) {
+        limitBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove selected class from all buttons
+                limitBtns.forEach(b => b.classList.remove('selected'));
+                // Add selected class to clicked button
+                btn.classList.add('selected');
+            });
+        });
+    }
+    
+    // Create quick hangout
+    if (createQuickHangout) {
+        createQuickHangout.addEventListener('click', () => {
+            createQuickHangoutEvent();
+        });
+    }
+}
+
+function resetNewHangoutForm() {
+    // Reset type selection
+    document.querySelectorAll('.hangout-type').forEach(type => {
+        type.classList.remove('selected');
+    });
+    
+    // Reset form fields
+    document.getElementById('quickEventTitle').value = '';
+    document.getElementById('quickEventTime').value = 'now';
+    document.getElementById('customDateTime').value = '';
+    document.getElementById('quickEventLocation').value = '';
+    
+    // Reset limit selection
+    document.querySelectorAll('.limit-btn').forEach(btn => {
+        btn.classList.remove('selected');
+    });
+    
+    // Hide custom time group
+    document.getElementById('customTimeGroup').style.display = 'none';
+    
+    // Show type selector, hide details
+    document.querySelector('.hangout-type-selector').style.display = 'block';
+    document.getElementById('hangoutDetails').style.display = 'none';
+}
+
+function createQuickHangoutEvent() {
+    const selectedType = document.querySelector('.hangout-type.selected');
+    if (!selectedType) {
+        showToast('Please select a hangout type!', 'warning');
+        return;
+    }
+    
+    const title = document.getElementById('quickEventTitle').value.trim();
+    const location = document.getElementById('quickEventLocation').value.trim();
+    const timeOption = document.getElementById('quickEventTime').value;
+    const selectedLimit = document.querySelector('.limit-btn.selected');
+    
+    if (!title || !location) {
+        showToast('Please fill in all required fields!', 'warning');
+        return;
+    }
+    
+    if (!selectedLimit) {
+        showToast('Please select a people limit!', 'warning');
+        return;
+    }
+    
+    // Calculate event date and time
+    let eventDate, eventTime;
+    const now = new Date();
+    
+    switch (timeOption) {
+        case 'now':
+            eventDate = now.toISOString().split('T')[0];
+            eventTime = now.toTimeString().slice(0, 5);
+            break;
+        case '1hour':
+            const oneHour = new Date(now.getTime() + 60 * 60 * 1000);
+            eventDate = oneHour.toISOString().split('T')[0];
+            eventTime = oneHour.toTimeString().slice(0, 5);
+            break;
+        case '2hours':
+            const twoHours = new Date(now.getTime() + 2 * 60 * 60 * 1000);
+            eventDate = twoHours.toISOString().split('T')[0];
+            eventTime = twoHours.toTimeString().slice(0, 5);
+            break;
+        case 'tomorrow':
+            const tomorrow = new Date(now.getTime() + 24 * 60 * 60 * 1000);
+            eventDate = tomorrow.toISOString().split('T')[0];
+            eventTime = '12:00'; // Default to noon
+            break;
+        case 'custom':
+            const customDateTime = document.getElementById('customDateTime').value;
+            if (!customDateTime) {
+                showToast('Please select a custom date and time!', 'warning');
+                return;
+            }
+            const customDate = new Date(customDateTime);
+            eventDate = customDate.toISOString().split('T')[0];
+            eventTime = customDate.toTimeString().slice(0, 5);
+            break;
+    }
+    
+    // Get limit
+    const limitValue = selectedLimit.dataset.limit;
+    const limit = limitValue === 'unlimited' ? 999 : parseInt(limitValue);
+    
+    // Get type icon
+    const typeIcon = selectedType.querySelector('.type-icon').textContent;
+    
+    // Create new event
+    const newEvent = {
+        id: Date.now(),
+        title: title,
+        date: eventDate,
+        time: eventTime,
+        location: location,
+        limit: limit,
+        description: `Quick hangout: ${title}`,
+        attendees: [currentUser],
+        icon: typeIcon,
+        creator: currentUser
+    };
+    
+    // Validate date is not in the past
+    const eventDateTime = new Date(newEvent.date + 'T' + newEvent.time);
+    if (eventDateTime < now) {
+        showToast('Hangout date and time must be in the future!', 'warning');
+        return;
+    }
+    
+    // Add to events array
+    events.unshift(newEvent);
+    
+    // Close modal and reset form
+    document.getElementById('newHangoutModal').classList.remove('show');
+    resetNewHangoutForm();
+    
+    // Re-render events
+    renderEvents();
+    renderMyEvents();
+    updateProfileStats();
+    
+    // Show success message
+    showToast('Quick hangout created successfully!', 'success');
+}
+
+// Tour System Implementation
+let tourCurrentStep = 0;
+let tourSteps = [];
+let tourOverlay = null;
+let tourSpotlight = null;
+let tourTooltip = null;
+
+// Tour steps configuration
+const tourConfig = [
+    {
+        target: '.nav-btn[data-section="hangout-hub"]',
+        title: 'Hangout Hub',
+        description: 'Browse and discover events happening around you. This is where you\'ll find all the cool hangouts!'
+    },
+    {
+        target: '.nav-btn[data-section="my-events"]',
+        title: 'My Hangouts',
+        description: 'View events you\'re attending and events you\'ve created. Keep track of your social calendar!'
+    },
+    {
+        target: '.nav-btn.add-event-btn',
+        title: 'Create Hangout',
+        description: 'Start your own hangout! Click the + button to create events and invite others to join.'
+    },
+    {
+        target: '.nav-btn[data-section="messages"]',
+        title: 'Messages',
+        description: 'Chat with other attendees and hosts. Stay connected with your hangout groups!'
+    }
+];
+
+// Initialize tour
+function initializeTour() {
+    // Check if tour has been completed
+    if (localStorage.getItem('tourCompleted') === 'true') {
+        return;
+    }
+    
+    // Get tour elements
+    tourOverlay = document.getElementById('tourOverlay');
+    tourSpotlight = document.getElementById('tourSpotlight');
+    tourTooltip = document.getElementById('tourTooltip');
+    
+    // Setup tour event listeners
+    setupTourEventListeners();
+    
+    // Start the tour
+    startTour();
+}
+
+// Setup tour event listeners
+function setupTourEventListeners() {
+    const skipBtn = document.getElementById('tourSkipBtn');
+    const nextBtn = document.getElementById('tourNextBtn');
+    
+    skipBtn.addEventListener('click', endTour);
+    nextBtn.addEventListener('click', nextTourStep);
+    
+    // Allow clicking on highlighted elements to advance
+    tourOverlay.addEventListener('click', (e) => {
+        if (e.target === tourOverlay) {
+            // Click outside tooltip - advance to next step
+            nextTourStep();
+        }
+    });
+}
+
+// Start the tour
+function startTour() {
+    tourCurrentStep = 0;
+    tourOverlay.style.display = 'flex';
+    showTourStep();
+}
+
+// Show current tour step
+function showTourStep() {
+    if (tourCurrentStep >= tourConfig.length) {
+        endTour();
+        return;
+    }
+    
+    const step = tourConfig[tourCurrentStep];
+    const targetElement = document.querySelector(step.target);
+    
+    if (!targetElement) {
+        console.warn('Tour target element not found:', step.target);
+        tourCurrentStep++;
+        showTourStep();
+        return;
+    }
+    
+    // Update step counter
+    document.getElementById('tourStepCounter').textContent = `Step ${tourCurrentStep + 1} of ${tourConfig.length}`;
+    
+    // Update tooltip content
+    document.getElementById('tourTitle').textContent = step.title;
+    document.getElementById('tourDescription').textContent = step.description;
+    
+    // Position spotlight on target element
+    positionSpotlight(targetElement);
+    
+    // Scroll to target element if needed
+    scrollToElement(targetElement);
+}
+
+// Position spotlight on target element
+function positionSpotlight(element) {
+    const rect = element.getBoundingClientRect();
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
+    
+    // Check if this is the main content area or a navigation button
+    const isMainContent = element.classList.contains('main-content');
+    
+    if (isMainContent) {
+        // For main content, cover the full area including footer
+        const header = document.querySelector('.app-header');
+        const headerHeight = header ? header.offsetHeight : 0;
+        
+        const startY = headerHeight;
+        const endY = window.innerHeight; // Include footer in focus
+        
+        tourSpotlight.style.left = (rect.left + scrollLeft) + 'px';
+        tourSpotlight.style.top = (startY + scrollTop) + 'px';
+        tourSpotlight.style.width = rect.width + 'px';
+        tourSpotlight.style.height = (endY - startY) + 'px';
+    } else {
+        // For navigation buttons, highlight just the button with some padding
+        const padding = 8;
+        
+        tourSpotlight.style.left = (rect.left + scrollLeft - padding) + 'px';
+        tourSpotlight.style.top = (rect.top + scrollTop - padding) + 'px';
+        tourSpotlight.style.width = (rect.width + (padding * 2)) + 'px';
+        tourSpotlight.style.height = (rect.height + (padding * 2)) + 'px';
+    }
+}
+
+
+// Scroll to element if needed
+function scrollToElement(element) {
+    const rect = element.getBoundingClientRect();
+    const viewportHeight = window.innerHeight;
+    
+    // If element is not visible, scroll to it
+    if (rect.top < 0 || rect.bottom > viewportHeight) {
+        element.scrollIntoView({
+            behavior: 'smooth',
+            block: 'center'
+        });
+    }
+}
+
+// Next tour step
+function nextTourStep() {
+    tourCurrentStep++;
+    showTourStep();
+}
+
+// End tour
+function endTour() {
+    tourOverlay.style.display = 'none';
+    localStorage.setItem('tourCompleted', 'true');
+    showToast('Tour completed! Welcome to We Should Hangout! 🎉', 'success');
+}
+
+// Reset tour (for testing purposes)
+function resetTour() {
+    localStorage.removeItem('tourCompleted');
+    showToast('Tour reset! Refresh the page to see it again.', 'success');
+}
+
+// Make resetTour available globally for testing
+window.resetTour = resetTour;
 
