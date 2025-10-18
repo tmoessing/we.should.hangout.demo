@@ -2,34 +2,46 @@
 const sampleEvents = [
     {
         id: 1,
-        title: "College Football Watch Party",
+        title: "Study Group - Midterm Prep",
         date: getTodayDate(),
-        time: "19:00", // 7:00 PM
-        location: "Student Union TV Lounge",
-        limit: 12,
-        description: "Watch the big game together! Bring snacks and drinks. We'll have the game on the big screen with surround sound.",
+        time: "15:00", // 3:00 PM
+        location: "Library Study Room 3B",
+        limit: 8,
+        description: "Midterm exam prep session for Chemistry 101. Bring your notes and practice problems. Coffee and snacks provided!",
         attendees: ["Sarah", "Mike", "Alex"],
-        icon: "🏈",
+        icon: "📚",
         creator: "Sarah",
         messages: [
             {
                 id: 1,
                 sender: "Sarah",
-                text: "Hey everyone! Just a reminder that we're meeting in the Student Union TV Lounge. Bring snacks and drinks!",
-                timestamp: new Date(Date.now() - 2 * 60 * 60 * 1000), // 2 hours ago
+                text: "Hey everyone! Just a reminder that we're meeting in Library Study Room 3B at 3 PM. Bring your chemistry notes!",
+                timestamp: new Date(getDemoTime().getTime() - 2 * 60 * 60 * 1000), // 2 hours ago
                 isHost: true
             },
             {
                 id: 2,
                 sender: "Mike",
-                text: "Thanks for the reminder! I'll bring some chips and drinks.",
-                timestamp: new Date(Date.now() - 1.5 * 60 * 60 * 1000), // 1.5 hours ago
+                text: "Thanks for the reminder! I'll bring my practice problems and calculator.",
+                timestamp: new Date(getDemoTime().getTime() - 1.5 * 60 * 60 * 1000), // 1.5 hours ago
                 isHost: false
             }
         ]
     },
     {
         id: 2,
+        title: "Coffee & Code Session",
+        date: getTodayDate(),
+        time: "16:30", // 4:30 PM
+        location: "Campus Coffee Shop",
+        limit: 6,
+        description: "Working on our group project together. Bring your laptops and coding questions!",
+        attendees: ["You", "Emma", "David"],
+        icon: "💻",
+        creator: "Emma"
+    },
+    {
+        id: 3,
         title: "Pickup Basketball",
         date: getTomorrowDate(),
         time: "18:00",
@@ -41,19 +53,7 @@ const sampleEvents = [
         creator: "Jake"
     },
     {
-        id: 3,
-        title: "Coffee & Chat",
-        date: getCurrentWeekDate(1), // Tuesday
-        time: "10:00",
-        location: "Starbucks Downtown",
-        limit: 8,
-        description: "Casual coffee meetup downtown! Great way to meet new people and chat.",
-        attendees: ["Emma", "Sophia", "David"],
-        icon: "☕",
-        creator: "Emma"
-    },
-    {
-        id: 4,
+        id: 5,
         title: "Hiking Trail",
         date: getCurrentWeekDate(6), // Saturday
         time: "08:00",
@@ -68,29 +68,29 @@ const sampleEvents = [
                 id: 6,
                 sender: "Alex",
                 text: "Good morning everyone! The weather looks perfect for our hike today. Meet at the trailhead at 8 AM sharp!",
-                timestamp: new Date(Date.now() - 1 * 60 * 60 * 1000), // 1 hour ago
+                timestamp: new Date(getDemoTime().getTime() - 1 * 60 * 60 * 1000), // 1 hour ago
                 isHost: true
             },
             {
                 id: 7,
                 sender: "Maya",
                 text: "I'm so excited! I've been looking forward to this all week. Should I bring extra water?",
-                timestamp: new Date(Date.now() - 45 * 60 * 1000), // 45 minutes ago
+                timestamp: new Date(getDemoTime().getTime() - 45 * 60 * 1000), // 45 minutes ago
                 isHost: false
             },
             {
                 id: 8,
                 sender: "You",
                 text: "I'll be there! Bringing my camera for some nature shots. See you all soon!",
-                timestamp: new Date(Date.now() - 30 * 60 * 1000), // 30 minutes ago
+                timestamp: new Date(getDemoTime().getTime() - 30 * 60 * 1000), // 30 minutes ago
                 isHost: false
             }
         ]
     },
     {
-        id: 5,
+        id: 6,
         title: "Game Night",
-        date: getCurrentWeekDate(0), // Sunday
+        date: getCurrentWeekNextDate(0), // Next Sunday
         time: "19:30",
         location: "Dorm Common Room",
         limit: 8,
@@ -103,29 +103,29 @@ const sampleEvents = [
                 id: 3,
                 sender: "You",
                 text: "Game night is happening tonight! I've got snacks and drinks ready. See you all at 7:30!",
-                timestamp: new Date(Date.now() - 4 * 60 * 60 * 1000), // 4 hours ago
+                timestamp: new Date(getDemoTime().getTime() - 4 * 60 * 60 * 1000), // 4 hours ago
                 isHost: true
             },
             {
                 id: 4,
                 sender: "Jordan",
                 text: "Can't wait! What games are we playing?",
-                timestamp: new Date(Date.now() - 3.5 * 60 * 60 * 1000), // 3.5 hours ago
+                timestamp: new Date(getDemoTime().getTime() - 3.5 * 60 * 60 * 1000), // 3.5 hours ago
                 isHost: false
             },
             {
                 id: 5,
                 sender: "Taylor",
                 text: "I'm bringing my favorite card game too!",
-                timestamp: new Date(Date.now() - 2 * 60 * 60 * 1000), // 2 hours ago
+                timestamp: new Date(getDemoTime().getTime() - 2 * 60 * 60 * 1000), // 2 hours ago
                 isHost: false
             }
         ]
     },
     {
-        id: 6,
+        id: 7,
         title: "Tennis Doubles",
-        date: getCurrentWeekDate(3), // Wednesday
+        date: getCurrentWeekNextDate(3), // Next Wednesday
         time: "17:00",
         location: "Campus Tennis Courts",
         limit: 4,
@@ -135,7 +135,7 @@ const sampleEvents = [
         creator: "Ryan"
     },
     {
-        id: 7,
+        id: 8,
         title: "Movie Night",
         date: getCurrentWeekDate(5), // Friday
         time: "20:00",
@@ -147,7 +147,7 @@ const sampleEvents = [
         creator: "Mike"
     },
     {
-        id: 8,
+        id: 9,
         title: "Art Museum Visit",
         date: getCurrentWeekNextDate(1), // Next Monday
         time: "14:00",
@@ -159,7 +159,7 @@ const sampleEvents = [
         creator: "Sophia"
     },
     {
-        id: 9,
+        id: 10,
         title: "Poker Night",
         date: getCurrentWeekNextDate(5), // Next Friday
         time: "20:00",
@@ -171,7 +171,7 @@ const sampleEvents = [
         creator: "Tyler"
     },
     {
-        id: 10,
+        id: 11,
         title: "Volleyball Tournament",
         date: getCurrentWeekNextDate(2), // Next Tuesday
         time: "19:30",
@@ -183,7 +183,7 @@ const sampleEvents = [
         creator: "Marcus"
     },
     {
-        id: 11,
+        id: 12,
         title: "Food Truck Festival",
         date: getCurrentWeekNextDate(6), // Next Saturday
         time: "12:00",
@@ -195,7 +195,7 @@ const sampleEvents = [
         creator: "Emma"
     },
     {
-        id: 12,
+        id: 13,
         title: "Photography Walk",
         date: getCurrentWeekNextDate(4), // Next Thursday
         time: "16:00",
@@ -207,7 +207,7 @@ const sampleEvents = [
         creator: "Alex"
     },
     {
-        id: 13,
+        id: 14,
         title: "Trivia Night",
         date: getCurrentWeekNextDate(3), // Next Wednesday
         time: "19:00",
@@ -219,7 +219,7 @@ const sampleEvents = [
         creator: "Mike"
     },
     {
-        id: 14,
+        id: 15,
         title: "Beach Volleyball",
         date: getCurrentWeekNextDate(0), // Next Sunday
         time: "15:00",
@@ -231,7 +231,7 @@ const sampleEvents = [
         creator: "Jordan"
     },
     {
-        id: 15,
+        id: 16,
         title: "Concert at Local Venue",
         date: getCurrentWeekNextDate(5), // Next Friday
         time: "21:00",
@@ -241,75 +241,147 @@ const sampleEvents = [
         attendees: ["David", "Maya", "Jessica", "Chris"],
         icon: "🎵",
         creator: "David"
+    },
+    {
+        id: 17,
+        title: "Evening Yoga Session",
+        date: getTodayDate(),
+        time: "18:30", // 6:30 PM today
+        location: "Campus Recreation Center - Yoga Studio",
+        limit: 12,
+        description: "Relaxing evening yoga to unwind after classes. All levels welcome, mats provided!",
+        attendees: ["Sophia", "Maya", "Chris"],
+        icon: "🧘",
+        creator: "Sophia"
+    },
+    {
+        id: 18,
+        title: "Late Night Study Session",
+        date: getTodayDate(),
+        time: "20:00", // 8:00 PM today
+        location: "24/7 Library - Study Room 2A",
+        limit: 6,
+        description: "Cramming for tomorrow's exam? Join us for a focused study session with coffee and snacks!",
+        attendees: ["You", "Alex", "Mike"],
+        icon: "☕",
+        creator: "Alex"
+    },
+    {
+        id: 19,
+        title: "Early Morning Run",
+        date: getTomorrowDate(),
+        time: "06:30", // 6:30 AM tomorrow
+        location: "Campus Track",
+        limit: 8,
+        description: "Start your Friday with energy! 3-mile run around campus. All paces welcome.",
+        attendees: ["Jake", "Marcus", "Tyler"],
+        icon: "🏃",
+        creator: "Jake"
+    },
+    {
+        id: 20,
+        title: "Breakfast Study Group",
+        date: getTomorrowDate(),
+        time: "08:00", // 8:00 AM tomorrow
+        location: "Campus Dining Hall",
+        limit: 10,
+        description: "Study over breakfast before classes. Coffee and pastries provided!",
+        attendees: ["Sarah", "Emma", "David", "Taylor"],
+        icon: "🥐",
+        creator: "Sarah"
     }
 ];
 
-// Helper functions for dates - Week-based system
+// Helper functions for dates - Fixed for October 23rd, 2025 demo
 function getTodayDate() {
-    const today = new Date();
-    return today.toISOString().split('T')[0];
+    // Demo is set for Thursday, October 23rd, 2025
+    return "2025-10-23";
 }
 
 function getTomorrowDate() {
-    const tomorrow = new Date();
-    tomorrow.setDate(tomorrow.getDate() + 1);
-    return tomorrow.toISOString().split('T')[0];
+    // Friday, October 24th, 2025
+    return "2025-10-24";
 }
 
 function getDateInDays(days) {
-    const date = new Date();
-    date.setDate(date.getDate() + days);
-    return date.toISOString().split('T')[0];
+    const baseDate = new Date("2025-10-23");
+    baseDate.setDate(baseDate.getDate() + days);
+    return baseDate.toISOString().split('T')[0];
 }
 
-// Week-based date functions - Dynamic current week
+// Week-based date functions - Fixed for October 23rd, 2025 week
 function getThisWeekDate(dayOfWeek) {
     // dayOfWeek: 0=Sunday, 1=Monday, 2=Tuesday, 3=Wednesday, 4=Thursday, 5=Friday, 6=Saturday
-    const today = new Date();
-    const currentDay = today.getDay();
-    const daysUntilTarget = (dayOfWeek - currentDay + 7) % 7;
-    
-    const targetDate = new Date(today);
-    targetDate.setDate(today.getDate() + daysUntilTarget);
-    return targetDate.toISOString().split('T')[0];
+    // Week of October 19-25, 2025 (October 23rd is Thursday)
+    const weekDates = {
+        0: "2025-10-19", // Sunday
+        1: "2025-10-20", // Monday
+        2: "2025-10-21", // Tuesday
+        3: "2025-10-22", // Wednesday
+        4: "2025-10-23", // Thursday
+        5: "2025-10-24", // Friday
+        6: "2025-10-25"  // Saturday
+    };
+    return weekDates[dayOfWeek];
 }
 
 function getNextWeekDate(dayOfWeek) {
-    // Get the same day next week
-    const thisWeekDate = getThisWeekDate(dayOfWeek);
-    const nextWeekDate = new Date(thisWeekDate);
-    nextWeekDate.setDate(nextWeekDate.getDate() + 7);
-    return nextWeekDate.toISOString().split('T')[0];
+    // Get the same day next week (October 26 - November 1, 2025)
+    const nextWeekDates = {
+        0: "2025-10-26", // Sunday
+        1: "2025-10-27", // Monday
+        2: "2025-10-28", // Tuesday
+        3: "2025-10-29", // Wednesday
+        4: "2025-10-30", // Thursday
+        5: "2025-10-31", // Friday
+        6: "2025-11-01"  // Saturday
+    };
+    return nextWeekDates[dayOfWeek];
 }
 
-// Dynamic week-based date functions that always use current week
+// Fixed week-based date functions for October 23rd, 2025 demo
 function getCurrentWeekDate(dayOfWeek) {
-    // Always returns the specified day of the current week
-    const today = new Date();
-    const currentDay = today.getDay();
-    const daysUntilTarget = (dayOfWeek - currentDay + 7) % 7;
-    
-    const targetDate = new Date(today);
-    targetDate.setDate(today.getDate() + daysUntilTarget);
-    return targetDate.toISOString().split('T')[0];
+    // Returns the specified day of the current week (October 19-25, 2025)
+    const weekDates = {
+        0: "2025-10-19", // Sunday
+        1: "2025-10-20", // Monday
+        2: "2025-10-21", // Tuesday
+        3: "2025-10-22", // Wednesday
+        4: "2025-10-23", // Thursday
+        5: "2025-10-24", // Friday
+        6: "2025-10-25"  // Saturday
+    };
+    return weekDates[dayOfWeek];
 }
 
 function getCurrentWeekNextDate(dayOfWeek) {
-    // Returns the specified day of next week
-    const thisWeekDate = getCurrentWeekDate(dayOfWeek);
-    const nextWeekDate = new Date(thisWeekDate);
-    nextWeekDate.setDate(nextWeekDate.getDate() + 7);
-    return nextWeekDate.toISOString().split('T')[0];
+    // Returns the specified day of next week (October 26 - November 1, 2025)
+    const nextWeekDates = {
+        0: "2025-10-26", // Sunday
+        1: "2025-10-27", // Monday
+        2: "2025-10-28", // Tuesday
+        3: "2025-10-29", // Wednesday
+        4: "2025-10-30", // Thursday
+        5: "2025-10-31", // Friday
+        6: "2025-11-01"  // Saturday
+    };
+    return nextWeekDates[dayOfWeek];
 }
 
 function getTimeInHours(hours) {
-    const now = new Date();
+    const now = getDemoTime();
     now.setHours(now.getHours() + hours);
     return now.toTimeString().slice(0, 5);
 }
 
 // Current user
 const currentUser = "You";
+
+// Demo time function - returns demo time instead of real time
+function getDemoTime() {
+    // Demo is set for Thursday, October 23rd, 2025 at 2:00 PM
+    return new Date("2025-10-23T14:00:00");
+}
 
 // Toast notification function
 function showToast(message, type = 'success', duration = 3000) {
@@ -473,8 +545,8 @@ function setupEventListeners() {
                     option.style.display = 'flex';
                 });
             });
-            // Reset unlimited attendees checkbox
-            document.getElementById('unlimitedAttendees').checked = false;
+            // Reset unlimited attendees button
+            document.getElementById('unlimitedAttendees').classList.remove('selected');
             document.getElementById('eventLimit').disabled = false;
             document.getElementById('decreaseLimit').disabled = false;
             document.getElementById('increaseLimit').disabled = false;
@@ -557,6 +629,7 @@ function setupEventListeners() {
         }
     });
 
+
     // Category selection - handle subcategory options
     const subcategoryOptions = document.querySelectorAll('.subcategory-option');
     subcategoryOptions.forEach(option => {
@@ -580,8 +653,8 @@ function setupEventListeners() {
                 option.style.display = 'flex';
             });
         });
-        // Reset unlimited attendees checkbox
-        document.getElementById('unlimitedAttendees').checked = false;
+        // Reset unlimited attendees button
+        document.getElementById('unlimitedAttendees').classList.remove('selected');
         document.getElementById('eventLimit').disabled = false;
         document.getElementById('decreaseLimit').disabled = false;
         document.getElementById('increaseLimit').disabled = false;
@@ -607,18 +680,22 @@ function setupEventListeners() {
         }
     });
 
-    // Handle unlimited attendees checkbox
-    unlimitedAttendees.addEventListener('change', () => {
-        if (unlimitedAttendees.checked) {
-            eventLimit.value = 999; // Set a high number for unlimited
-            eventLimit.disabled = true;
-            decreaseLimit.disabled = true;
-            increaseLimit.disabled = true;
-        } else {
+    // Handle unlimited attendees button
+    unlimitedAttendees.addEventListener('click', () => {
+        if (unlimitedAttendees.classList.contains('selected')) {
+            // Deselect unlimited
+            unlimitedAttendees.classList.remove('selected');
             eventLimit.disabled = false;
             decreaseLimit.disabled = false;
             increaseLimit.disabled = false;
             eventLimit.value = 3; // Reset to minimum
+        } else {
+            // Select unlimited
+            unlimitedAttendees.classList.add('selected');
+            eventLimit.value = 999; // Set a high number for unlimited
+            eventLimit.disabled = true;
+            decreaseLimit.disabled = true;
+            increaseLimit.disabled = true;
         }
     });
 
@@ -735,8 +812,8 @@ function renderEvents() {
         return;
     }
 
-    // Group events by time period
-    const now = new Date();
+    // Group events by time period - Demo perspective: Thursday, October 23rd, 2025 at 2:00 PM
+    const now = new Date("2025-10-23T14:00:00"); // Thursday 2:00 PM for demo
     const next24Hours = new Date(now.getTime() + 24 * 60 * 60 * 1000);
     const tomorrow = new Date(now);
     tomorrow.setDate(tomorrow.getDate() + 1);
@@ -914,8 +991,6 @@ function getEventIcon(title) {
         return '⚽';
     } else if (titleLower.includes('swimming') || titleLower.includes('pool')) {
         return '🏊';
-    } else if (titleLower.includes('coffee') || titleLower.includes('cafe')) {
-        return '☕';
     } else if (titleLower.includes('dinner') || titleLower.includes('lunch') || titleLower.includes('food')) {
         return '🍽️';
     } else if (titleLower.includes('party') || titleLower.includes('celebration')) {
@@ -938,7 +1013,7 @@ function getCategoryFromIcon(icon) {
         return 'entertainment';
     }
     // Food & Dining icons
-    if (['🍽️', '☕', '🍖', '🥘', '👨‍🍳'].includes(icon)) {
+    if (['🍽️', '🍖', '🥘', '👨‍🍳'].includes(icon)) {
         return 'food';
     }
     // Social icons
@@ -1084,7 +1159,8 @@ function handleAddEvent(e) {
         limit: parseInt(formData.get('limit')),
         description: formData.get('description'),
         attendees: [currentUser], // Creator automatically joins
-        icon: icon
+        icon: icon,
+        creator: currentUser
     };
     
     // Validate minimum people
@@ -1095,7 +1171,7 @@ function handleAddEvent(e) {
 
     // Validate date is not in the past
     const eventDateTime = new Date(newEvent.date + 'T' + newEvent.time);
-    const now = new Date();
+    const now = getDemoTime();
     if (eventDateTime < now) {
         showToast('Hangout date and time must be in the future!', 'warning');
         return;
@@ -1125,10 +1201,23 @@ function handleAddEvent(e) {
         });
     });
     
+    // Reset unlimited attendees button
+    document.getElementById('unlimitedAttendees').classList.remove('selected');
+    document.getElementById('eventLimit').disabled = false;
+    document.getElementById('decreaseLimit').disabled = false;
+    document.getElementById('increaseLimit').disabled = false;
+    
     // Re-render events
     renderEvents();
     renderMyEvents();
     updateProfileStats();
+    
+    // Navigate to hub and update navigation
+    handleNavigation('hangout-hub');
+    
+    // Update bottom navigation to show hub as active
+    document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+    document.querySelector('.nav-btn[data-section="hangout-hub"]').classList.add('active');
     
     // Show success message
     showToast('Hangout created successfully!', 'success');
@@ -1553,7 +1642,7 @@ function getAvatarColor(index) {
 document.addEventListener('DOMContentLoaded', function() {
     const dateInput = document.getElementById('eventDate');
     if (dateInput) {
-        const today = new Date().toISOString().split('T')[0];
+        const today = getDemoTime().toISOString().split('T')[0];
         dateInput.min = today;
     }
 });
@@ -1589,7 +1678,7 @@ function sendMessage(eventId, text) {
         id: Date.now(),
         sender: currentUser,
         text: text.trim(),
-        timestamp: new Date(),
+        timestamp: getDemoTime(),
         isHost: event.creator === currentUser
     };
     
@@ -1705,7 +1794,7 @@ function getUnreadCount(eventId) {
     // For demo purposes, count messages not from current user as unread
     return event.messages.filter(message => 
         message.sender !== currentUser && 
-        new Date(message.timestamp) > new Date(Date.now() - 24 * 60 * 60 * 1000) // Last 24 hours
+        new Date(message.timestamp) > new Date(getDemoTime().getTime() - 24 * 60 * 60 * 1000) // Last 24 hours
     ).length;
 }
 
@@ -1724,7 +1813,7 @@ function updateUnreadBadge() {
 
 // Format message time
 function formatMessageTime(timestamp) {
-    const now = new Date();
+    const now = getDemoTime();
     const messageTime = new Date(timestamp);
     const diffInMinutes = Math.floor((now - messageTime) / (1000 * 60));
     
@@ -1894,7 +1983,7 @@ function createQuickHangoutEvent() {
     
     // Calculate event date and time
     let eventDate, eventTime;
-    const now = new Date();
+    const now = getDemoTime();
     
     switch (timeOption) {
         case 'now':

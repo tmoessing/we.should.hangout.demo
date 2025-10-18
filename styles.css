@@ -58,9 +58,9 @@ body {
     color: #ffd700;
     text-align: center;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-    letter-spacing: 0.5px;
+    letter-spacing: 0.3px;
     font-family: 'Courier New', monospace;
-    text-transform: none;
+    text-transform: uppercase;
     position: relative;
     z-index: 1;
 }
@@ -1137,9 +1137,12 @@ body {
 
 /* Joined Actions */
 .joined-actions {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 12px;
+    width: 100%;
+    padding: 8px 0;
 }
 
 .action-btn {
@@ -1159,6 +1162,9 @@ body {
     text-transform: uppercase;
     letter-spacing: 0.2px;
     flex: 1;
+    min-width: 0;
+    width: 100%;
+    box-sizing: border-box;
     box-shadow: 
         0 3px 12px rgba(59, 130, 246, 0.4),
         inset 0 1px 0 rgba(255, 255, 255, 0.3);
@@ -1486,66 +1492,9 @@ body {
     align-items: center;
     gap: 8px;
     justify-content: center;
+    flex-wrap: wrap;
 }
 
-/* Unlimited Option */
-.unlimited-option {
-    display: flex;
-    justify-content: center;
-}
-
-.unlimited-checkbox {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: 600;
-    color: #ffd700;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-.unlimited-checkbox input[type="checkbox"] {
-    display: none;
-}
-
-.checkmark {
-    width: 20px;
-    height: 20px;
-    border: 2px solid #ffd700;
-    border-radius: 4px;
-    background: rgba(51, 0, 102, 0.3);
-    position: relative;
-    transition: all 0.3s ease;
-}
-
-.unlimited-checkbox input[type="checkbox"]:checked + .checkmark {
-    background: linear-gradient(135deg, #ffd700, #ff6b00);
-    border-color: #ff6b00;
-}
-
-.unlimited-checkbox input[type="checkbox"]:checked + .checkmark::after {
-    content: "✓";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: #1e40af;
-    font-weight: 700;
-    font-size: 12px;
-}
-
-.unlimited-text {
-    color: #ffd700;
-    font-weight: 600;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
-}
-
-.unlimited-checkbox:hover .checkmark {
-    border-color: #ff6b00;
-    box-shadow: 0 0 10px rgba(255, 107, 0, 0.3);
-}
 
 .number-btn {
     background: linear-gradient(135deg, #ffd700, #ff6b00);
@@ -1574,6 +1523,45 @@ body {
 
 .number-btn:active {
     transform: scale(0.95);
+}
+
+.unlimited-btn {
+    background: linear-gradient(135deg, #ffd700, #ff6b00);
+    color: #1e40af;
+    border: 2px solid #ffd700;
+    padding: 8px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    box-shadow: 
+        0 2px 8px rgba(255, 215, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    white-space: nowrap;
+}
+
+.unlimited-btn:hover {
+    background: linear-gradient(135deg, #ff6b00, #ff8c00);
+    transform: scale(1.05);
+    box-shadow: 
+        0 4px 12px rgba(255, 107, 0, 0.4),
+        0 0 15px rgba(255, 107, 0, 0.3);
+}
+
+.unlimited-btn:active {
+    transform: scale(0.95);
+}
+
+.unlimited-btn.selected {
+    background: linear-gradient(135deg, #1e40af, #3b82f6);
+    color: #dbeafe;
+    border-color: #3b82f6;
+    box-shadow: 
+        0 4px 15px rgba(30, 64, 175, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
 
 #eventLimit {
@@ -1650,10 +1638,6 @@ body {
         0 0 25px rgba(255, 107, 0, 0.4);
 }
 
-.create-btn::before {
-    content: "💃";
-    font-size: 14px;
-}
 
 /* Responsive Design */
 @media (max-width: 480px) {
@@ -1667,6 +1651,33 @@ body {
     
     .event-card {
         padding: 15px;
+    }
+    
+    /* Fix header controls overlapping with Hub text on mobile */
+    .hangout-hub-header {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .header-controls {
+        position: static;
+        transform: none;
+        justify-content: flex-end;
+    }
+    
+    .hangout-hub h2 {
+        font-size: 20px;
+        margin-bottom: 0;
+        flex: 1;
+        text-align: left;
+    }
+    
+    /* Ensure joined-actions grid works on mobile */
+    .joined-actions {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        grid-template-rows: auto auto !important;
     }
 }
 
