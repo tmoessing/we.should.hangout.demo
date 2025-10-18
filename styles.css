@@ -16,6 +16,7 @@ body {
     max-width: 414px;
     margin: 0 auto;
     background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+    min-height: 100vh;
     height: 100vh;
     position: relative;
     box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
@@ -351,6 +352,85 @@ body {
     letter-spacing: 0.3px;
     margin-top: 2px;
     opacity: 0.7;
+}
+
+.stats-section {
+    margin-top: 20px;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+.stat-card {
+    background: linear-gradient(135deg, #1e40af, #3b82f6);
+    border: 2px solid #3b82f6;
+    border-radius: 12px;
+    padding: 15px;
+    text-align: center;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.stat-card:hover {
+    transform: scale(1.02);
+    box-shadow: 
+        0 6px 20px rgba(59, 130, 246, 0.4),
+        0 0 25px rgba(29, 78, 216, 0.3);
+    border-color: #60a5fa;
+}
+
+.stat-card-icon {
+    font-size: 24px;
+    display: block;
+    margin-bottom: 8px;
+    color: #ffd700;
+}
+
+.stat-card-number {
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: 700;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+    line-height: 1;
+    margin-bottom: 4px;
+}
+
+.stat-card-label {
+    color: #dbeafe;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    opacity: 0.9;
+}
+
+.stat-card-sub {
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.stat-card-sub-number {
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 700;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+    line-height: 1;
+    margin-bottom: 2px;
+}
+
+.stat-card-sub-label {
+    color: #dbeafe;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    opacity: 0.8;
 }
 
 .badges-section {
@@ -747,15 +827,15 @@ body {
 .attendees-count {
     background: linear-gradient(135deg, #60a5fa, #3b82f6);
     color: #ffffff;
-    padding: 1px 4px;
-    border-radius: 8px;
-    font-size: 7px;
+    padding: 3px 6px;
+    border-radius: 10px;
+    font-size: 10px;
     font-weight: 700;
     box-shadow: 
-        0 1px 4px rgba(96, 165, 250, 0.5),
+        0 2px 6px rgba(96, 165, 250, 0.5),
         inset 0 1px 0 rgba(255, 255, 255, 0.4);
     text-transform: uppercase;
-    letter-spacing: 0.2px;
+    letter-spacing: 0.3px;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
 }
 
@@ -786,6 +866,36 @@ body {
 
 .attendee-avatar:first-child {
     margin-left: 0;
+}
+
+/* Add Event Card */
+.add-event-card {
+    background: linear-gradient(135deg, #1e3a8a, #1e40af);
+    border: 2px dashed #60a5fa;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.add-event-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+    border-color: #93c5fd;
+    background: linear-gradient(135deg, #1e40af, #3b82f6);
+}
+
+.add-event-card .event-icon {
+    color: #60a5fa;
+    font-size: 16px;
+}
+
+.add-event-card .event-meta i {
+    color: #93c5fd;
+}
+
+.add-event-card .attendees-count {
+    background: linear-gradient(135deg, #60a5fa, #93c5fd);
+    color: #1e40af;
+    font-weight: 700;
 }
 
 /* Event Actions */
@@ -848,6 +958,7 @@ body {
     box-shadow: 0 -1px 4px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
     border-radius: 8px 8px 0 0;
     flex-shrink: 0; /* Don't shrink the footer */
+    margin-top: auto; /* Push footer to bottom */
 }
 
 .bottom-nav::before {
@@ -1639,6 +1750,21 @@ body {
 }
 
 
+/* Desktop Layout */
+@media (min-width: 1024px) {
+    .app-container {
+        max-width: 414px;
+        height: auto;
+        min-height: 100vh;
+        margin: 20px auto;
+    }
+    
+    body {
+        padding: 20px 0;
+        min-height: 100vh;
+    }
+}
+
 /* Responsive Design */
 @media (max-width: 480px) {
     .app-container {
@@ -1986,16 +2112,16 @@ body {
 .message-bubble.host {
     background: linear-gradient(135deg, #3b82f6, #1d4ed8);
     color: #dbeafe;
-    align-self: flex-end;
-    border-bottom-right-radius: 5px;
+    align-self: flex-start;
+    border-bottom-left-radius: 5px;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
 }
 
 .message-bubble.attendee {
     background: linear-gradient(135deg, #1e40af, #1e3a8a);
     color: #dbeafe;
-    align-self: flex-start;
-    border-bottom-left-radius: 5px;
+    align-self: flex-end;
+    border-bottom-right-radius: 5px;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
 }
 

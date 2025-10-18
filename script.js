@@ -1,46 +1,6 @@
 // Sample events data for college students
 const sampleEvents = [
     {
-        id: 1,
-        title: "Study Group - Midterm Prep",
-        date: getTodayDate(),
-        time: "15:00", // 3:00 PM
-        location: "Library Study Room 3B",
-        limit: 8,
-        description: "Midterm exam prep session for Chemistry 101. Bring your notes and practice problems. Coffee and snacks provided!",
-        attendees: ["Sarah", "Mike", "Alex"],
-        icon: "📚",
-        creator: "Sarah",
-        messages: [
-            {
-                id: 1,
-                sender: "Sarah",
-                text: "Hey everyone! Just a reminder that we're meeting in Library Study Room 3B at 3 PM. Bring your chemistry notes!",
-                timestamp: new Date(getDemoTime().getTime() - 2 * 60 * 60 * 1000), // 2 hours ago
-                isHost: true
-            },
-            {
-                id: 2,
-                sender: "Mike",
-                text: "Thanks for the reminder! I'll bring my practice problems and calculator.",
-                timestamp: new Date(getDemoTime().getTime() - 1.5 * 60 * 60 * 1000), // 1.5 hours ago
-                isHost: false
-            }
-        ]
-    },
-    {
-        id: 2,
-        title: "Coffee & Code Session",
-        date: getTodayDate(),
-        time: "16:30", // 4:30 PM
-        location: "Campus Coffee Shop",
-        limit: 6,
-        description: "Working on our group project together. Bring your laptops and coding questions!",
-        attendees: ["You", "Emma", "David"],
-        icon: "💻",
-        creator: "Emma"
-    },
-    {
         id: 3,
         title: "Pickup Basketball",
         date: getTomorrowDate(),
@@ -95,9 +55,9 @@ const sampleEvents = [
         location: "Dorm Common Room",
         limit: 8,
         description: "Board games and snacks! We have Cards Against Humanity, Settlers of Catan, and more!",
-        attendees: ["You", "Jordan", "Taylor", "Sam", "Casey"],
+        attendees: ["Jordan", "Taylor", "Sam", "Casey", "You"],
         icon: "🎲",
-        creator: "You",
+        creator: "Jordan",
         messages: [
             {
                 id: 3,
@@ -142,7 +102,7 @@ const sampleEvents = [
         location: "Student Union Theater",
         limit: 20,
         description: "Free movie screening! This week: The latest blockbuster. Popcorn provided!",
-        attendees: ["You", "Mike", "Sarah", "Alex", "Emma", "David", "Taylor"],
+        attendees: ["Mike", "Sarah", "Alex", "Emma", "David", "Taylor"],
         icon: "🎬",
         creator: "Mike"
     },
@@ -214,7 +174,7 @@ const sampleEvents = [
         location: "Campus Pub",
         limit: 20,
         description: "Weekly trivia night at the campus pub! Form teams and compete for prizes!",
-        attendees: ["You", "Mike", "Sarah", "Taylor", "Sam", "Casey", "Ryan"],
+        attendees: ["Mike", "Sarah", "Taylor", "Sam", "Casey", "Ryan", "You"],
         icon: "🧠",
         creator: "Mike"
     },
@@ -244,27 +204,15 @@ const sampleEvents = [
     },
     {
         id: 17,
-        title: "Evening Yoga Session",
+        title: "Game Night",
         date: getTodayDate(),
         time: "18:30", // 6:30 PM today
-        location: "Campus Recreation Center - Yoga Studio",
+        location: "Student Union Game Room",
         limit: 12,
-        description: "Relaxing evening yoga to unwind after classes. All levels welcome, mats provided!",
+        description: "Board games, card games, and video games! Bring your favorite games or try new ones. Snacks provided!",
         attendees: ["Sophia", "Maya", "Chris"],
-        icon: "🧘",
+        icon: "🎲",
         creator: "Sophia"
-    },
-    {
-        id: 18,
-        title: "Late Night Study Session",
-        date: getTodayDate(),
-        time: "20:00", // 8:00 PM today
-        location: "24/7 Library - Study Room 2A",
-        limit: 6,
-        description: "Cramming for tomorrow's exam? Join us for a focused study session with coffee and snacks!",
-        attendees: ["You", "Alex", "Mike"],
-        icon: "☕",
-        creator: "Alex"
     },
     {
         id: 19,
@@ -279,16 +227,40 @@ const sampleEvents = [
         creator: "Jake"
     },
     {
-        id: 20,
-        title: "Breakfast Study Group",
-        date: getTomorrowDate(),
-        time: "08:00", // 8:00 AM tomorrow
-        location: "Campus Dining Hall",
-        limit: 10,
-        description: "Study over breakfast before classes. Coffee and pastries provided!",
-        attendees: ["Sarah", "Emma", "David", "Taylor"],
-        icon: "🥐",
+        id: 21,
+        title: "Pickleball",
+        date: getTodayDate(),
+        time: "16:00", // 4:00 PM today (Thursday)
+        location: "Student Recreation Center - Court 2",
+        limit: 8,
+        description: "Pickleball game at the rec center! All skill levels welcome. Paddles provided!",
+        attendees: ["Mike", "Alex"],
+        icon: "🏓",
+        creator: "Mike"
+    },
+    {
+        id: 22,
+        title: "Movie Night - Inception",
+        date: getTodayDate(),
+        time: "19:00", // 7:00 PM today (Thursday)
+        location: "Student Union Theater",
+        limit: 15,
+        description: "Watching Inception! Mind-bending thriller that will blow your mind. Popcorn and drinks provided!",
+        attendees: ["Sarah", "Emma", "David"],
+        icon: "🎬",
         creator: "Sarah"
+    },
+    {
+        id: 23,
+        title: "College Football Watch Party",
+        date: getTomorrowDate(),
+        time: "19:30", // 7:30 PM Friday
+        location: "Campus Sports Bar",
+        limit: 20,
+        description: "Watch the big game together! Food and drinks available. Come cheer for our team!",
+        attendees: ["Jake", "Marcus", "Tyler", "Jordan"],
+        icon: "🏈",
+        creator: "Jake"
     }
 ];
 
@@ -378,6 +350,7 @@ function getTimeInHours(hours) {
 const currentUser = "You";
 
 // Demo time function - returns demo time instead of real time
+// Updated: Fixed date to Thursday, October 23rd, 2025
 function getDemoTime() {
     // Demo is set for Thursday, October 23rd, 2025 at 2:00 PM
     return new Date("2025-10-23T14:00:00");
@@ -925,9 +898,11 @@ function openEventModal(eventId) {
     const joinedActions = document.getElementById('joinedActions');
     
     if (isUserAttending) {
+        // User is already attending - hide join button, show action buttons
         joinEventBtn.style.display = 'none';
-        joinedActions.style.display = 'flex';
+        joinedActions.style.display = 'grid';
     } else {
+        // User is not attending - show join button, hide action buttons
         joinEventBtn.style.display = 'block';
         joinedActions.style.display = 'none';
         joinEventBtn.innerHTML = '<i class="fas fa-user-plus"></i> Join Event';
@@ -1256,7 +1231,12 @@ function renderMyEvents() {
     // Get attending events (events user joined but didn't create)
     const attendingEvents = events.filter(event => 
         event.attendees.includes(currentUser) && event.creator !== currentUser
-    );
+    ).sort((a, b) => {
+        // Sort by date first, then by time
+        const dateA = new Date(a.date + 'T' + a.time);
+        const dateB = new Date(b.date + 'T' + b.time);
+        return dateA - dateB;
+    });
     
     // Get hosted events (events user created)
     const hostedEvents = events.filter(event => 
@@ -1279,17 +1259,32 @@ function renderMyEvents() {
     
     // Render hosted events
     const hostedEventsList = document.getElementById('hostedEventsList');
-    if (hostedEvents.length === 0) {
-        hostedEventsList.innerHTML = `
-            <div class="empty-state">
-                <i class="fas fa-calendar-plus"></i>
-                <h3>No hangouts created yet</h3>
-                <p>Create your first hangout to get started! 🎉</p>
-            </div>
-        `;
-    } else {
-        hostedEventsList.innerHTML = hostedEvents.map(event => renderEventCardWithActions(event, true)).join('');
+    let hostedEventsHtml = '';
+    
+    // Add existing hosted events
+    if (hostedEvents.length > 0) {
+        hostedEventsHtml += hostedEvents.map(event => renderEventCardWithActions(event, true)).join('');
     }
+    
+    // Always add the "Add Event" card
+    hostedEventsHtml += `
+        <div class="event-card add-event-card" onclick="document.getElementById('addEventBtn').click()">
+            <div class="event-title">
+                <div class="event-title-left">
+                    <span class="event-icon">➕</span>
+                    Create New Hangout
+                </div>
+            </div>
+            <div class="event-meta">
+                <div><i class="fas fa-plus-circle"></i> Start planning your next event</div>
+            </div>
+            <div class="event-attendees">
+                <div class="attendees-count">Tap to create</div>
+            </div>
+        </div>
+    `;
+    
+    hostedEventsList.innerHTML = hostedEventsHtml;
 }
 
 // Update profile stats
@@ -1305,14 +1300,55 @@ function updateProfileStats() {
         return total;
     }, 0);
     
-    // Set realistic stats for BYU student (these would normally be calculated from actual data)
-    document.getElementById('eventsCreated').textContent = '5';
-    document.getElementById('eventsJoined').textContent = '12';
-    document.getElementById('totalAttendees').textContent = '28';
-    document.getElementById('peopleMet').textContent = '67';
+    // Stats are now displayed in the stats grid below
     
     // Update badges
     updateBadges(5, 12, 28);
+    
+    // Update stats grid
+    updateStatsGrid(5, 12, 28, 67);
+}
+
+// Update stats grid with cards
+function updateStatsGrid(created, joined, totalAttendees, peopleMet) {
+    const statsGrid = document.getElementById('statsGrid');
+    
+    const stats = [
+        {
+            icon: '🎯',
+            number: created,
+            label: 'Events Created',
+            subNumber: totalAttendees,
+            subLabel: 'Total Attendees',
+            color: 'linear-gradient(135deg, #1e40af, #3b82f6)'
+        },
+        {
+            icon: '🤝',
+            number: joined,
+            label: 'Events Joined',
+            color: 'linear-gradient(135deg, #059669, #10b981)'
+        },
+        {
+            icon: '🌟',
+            number: peopleMet,
+            label: 'People Met',
+            color: 'linear-gradient(135deg, #dc2626, #ef4444)'
+        }
+    ];
+    
+    statsGrid.innerHTML = stats.map(stat => `
+        <div class="stat-card" style="background: ${stat.color};">
+            <span class="stat-card-icon">${stat.icon}</span>
+            <div class="stat-card-number">${stat.number}</div>
+            <div class="stat-card-label">${stat.label}</div>
+            ${stat.subNumber ? `
+                <div class="stat-card-sub">
+                    <div class="stat-card-sub-number">${stat.subNumber}</div>
+                    <div class="stat-card-sub-label">${stat.subLabel}</div>
+                </div>
+            ` : ''}
+        </div>
+    `).join('');
 }
 
 // Badge system
@@ -1617,7 +1653,8 @@ function leaveEvent(eventId) {
 
 // Utility functions
 function formatDate(dateString) {
-    const date = new Date(dateString);
+    const [year, month, day] = dateString.split('-');
+    const date = new Date(year, month - 1, day);
     return date.toLocaleDateString('en-US', { 
         weekday: 'short', 
         month: 'short', 
